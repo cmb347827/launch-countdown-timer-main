@@ -1,0 +1,143 @@
+@import '_globals.scss';
+@import '_flexgrid.scss';
+
+
+$colors: (
+  White: hsl(0,100%,100%),
+  black: hsl(100,0%,0%),
+  
+);
+
+$fallback-colors: (
+   Snow, black
+);
+
+@mixin background($url,$position:auto,$size:auto,$repeat:no-repeat,$fixed:fixed,$color:white){
+    background: url($url) $position/$size $repeat $fixed $color; 
+}
+@mixin font-color($color, $fallback-color) {
+  color: $fallback-color;
+  color: $color;
+}
+
+@mixin bg-color($color, $fallback-color) {
+  background-color: $fallback-color;
+  background-color: $color;
+}
+@mixin margin($args...) {
+  margin: $args;
+}
+@mixin padding($args...) {
+  padding: $args;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  //@include bg-color(map-get($colors,White),nth($fallback-colors,1));
+  // background: hsl(236, 21%, 26%) url(./images/bg-stars.svg) top left/100% 100%;
+  @include font-color(map-get($colors,Black),nth($fallback-colors,2));
+  font: {
+     //font-size: 1em;
+     weight: $font_weight-normal;
+	   family: "./fonts/League Spartan", serif;
+  }
+  
+}
+.sr-only{
+    //see https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034 
+    border: 0 !important;
+    clip-path: inset(50%) !important; /* 2 */
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    width: 1px !important;
+    white-space: nowrap !important; /* 3 */
+}
+.fontweight-semi{
+    font-weight: $font_weight-semibold;
+}
+.fontweight-ultrabold{
+    font-weight: $font_weight-ultrabold;
+}
+
+.text-center{
+    text-align:center;
+}
+.text-uppercase{
+    text-transform: uppercase;
+}
+.img-fluid{
+   max-width: 100%;
+   height:auto;
+}
+.svg-hills-outer{
+
+    max-width: 100%;
+    max-height: 100%;
+    @media screen and(min-width: 768px){
+        
+    }
+}
+.svg-100{
+    width:100%;
+    height:100%;
+}
+.top-z-index{
+  //needed for z-index.
+  position: relative;
+  z-index: 1;
+  opacity:1;
+}
+
+@media (scripting: enabled) {
+      #background{
+         background: hsl(236, 21%, 26%) url(./images/bg-stars.svg) top left/100% 100%;
+      }
+      main{
+          height: 95vh;
+          overflow:hidden;
+          
+            
+          section{
+              padding: 7em 2em;
+              div p{
+                 font-size:1.2em;
+              }
+          }
+      
+      }
+      #hills{
+          position:relative;
+          top: calc(100% - 700px);
+      }  
+      #background-color-add-height{
+          position:relative;
+          width: 100vw;
+          height: 699px;
+          background-color: #2F2439;
+      }
+      footer{
+              
+        position:relative;
+        top: 10em;
+          
+        @media screen and(min-width:768px){
+            @include padding(4em);
+            font-size:1.2em;
+        }
+      }
+}
+@media (scripting: none) {
+  
+  /* fallback styles when JS is not supported */
+  /*leave carousel collapsed but add some styling */
+
+}
