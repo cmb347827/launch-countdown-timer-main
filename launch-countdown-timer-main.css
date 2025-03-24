@@ -180,6 +180,10 @@ body {
 .fontweight-ultrabold {
   font-weight: 900; }
 
+.white-font {
+  color: Snow;
+  color: white; }
+
 .text-center {
   text-align: center; }
 

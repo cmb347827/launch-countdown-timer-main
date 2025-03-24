@@ -61,19 +61,25 @@ body {
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
 }
+
+//text/font classes
 .fontweight-semi{
     font-weight: $font_weight-semibold;
 }
 .fontweight-ultrabold{
     font-weight: $font_weight-ultrabold;
 }
-
+.white-font{
+  @include font-color(map-get($colors,White),nth($fallback-colors,1));
+}
 .text-center{
     text-align:center;
 }
 .text-uppercase{
     text-transform: uppercase;
 }
+
+//image/svg classes
 .img-fluid{
    max-width: 100%;
    height:auto;
