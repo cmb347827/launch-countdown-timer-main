@@ -5,11 +5,11 @@
 $colors: (
   White: hsl(0,100%,100%),
   black: hsl(100,0%,0%),
-  
+  Soft red: hsl(345, 95%, 68%),
 );
 
 $fallback-colors: (
-   Snow, black
+   Snow, black, IndianRed,
 );
 
 @mixin background($url,$position:auto,$size:auto,$repeat:no-repeat,$fixed:fixed,$color:white){
@@ -44,7 +44,7 @@ body {
   // background: hsl(236, 21%, 26%) url(./images/bg-stars.svg) top left/100% 100%;
   @include font-color(map-get($colors,Black),nth($fallback-colors,2));
   font: {
-     //font-size: 1em;
+     font-size: 1em;
      weight: $font_weight-normal;
 	   family: "./fonts/League Spartan", serif;
   }
@@ -101,6 +101,15 @@ body {
       #background{
          background: hsl(236, 21%, 26%) url(./images/bg-stars.svg) top left/100% 100%;
       }
+      .red-thick-font{
+        @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
+        font-weight: $font_weight-ultrabold;
+        font-size: 3em;
+      }
+      h1{
+         position:relative;
+         top: 1em;
+      }
       main{
           height: 95vh;
           overflow:hidden;
@@ -111,17 +120,22 @@ body {
               div p{
                  font-size:1.2em;
               }
+              .screen{
+                 border: 2px solid gray;
+                 width: 200px;
+              }
           }
       
       }
       #hills{
           position:relative;
-          top: calc(100% - 700px);
+          top: calc(100% - 703px);
       }  
       #background-color-add-height{
           position:relative;
+          top:-4px;
           width: 100vw;
-          height: 699px;
+          height:700px;
           background-color: #2F2439;
       }
       footer{
