@@ -24,7 +24,7 @@ const data ={
 
 
 const addLeadingZero=(string,length)=>{
-    return string.padStart(length,'0');
+    return String(string.padStart(length,'0'));
 }
 const displayCountdown=(days,hours,minutes,seconds)=>{
     data.display_days.textContent = addLeadingZero(days,2);
@@ -42,8 +42,9 @@ const timePassed=()=>{
 const updateMilliseconds=()=>{
      //data.daysMilliseconds = calculateMilliseconds(days) line 85.
      //difference between calculateMilliseconds(days) and timePassed()
+      data.timePassed = timePassed();
       data.timeLeft = data.daysMilliseconds - data.timePassed;             
-     //displayCountdown  , call with string values for days,hours,minutes and seconds.
+      updateValues();
 }
 const calculateMilliseconds=(days)=>{
     //1 day: 24 hours : 24 * 60 = 1440 minutes * 60 = 86400 seconds * 1000 = 86400000 milliseconds
@@ -53,8 +54,12 @@ const calculateMilliseconds=(days)=>{
 }
 
 const updateValues=()=>{
-    console.log(data.timeLeft);
-    //convert milliseconds to days , hours, minutes, and seconds remaining.
+    //convert data.timeLeft is in milliseconds to days , hours, minutes, and seconds remaining.
+    // divide by 1000 is in seconds. 
+    
+    //divide by 60 is minutes
+    //update reachedZero.
+
 }
 
 const countDown=(days,hours,minutes,seconds)=>{
@@ -63,16 +68,14 @@ const countDown=(days,hours,minutes,seconds)=>{
     
     setInterval(() => {
         if(!data.reachedZero){
-            //asynchronous calls ...............
-            timePassed();
             updateMilliseconds();
-            updateValues();
+            displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
         } else if(data.reachedZero){
             //should be all zeros.
             displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
         }
        
-    }, 1000);
+    }, 1000);   //still to add delete interval id.
 
    
 
@@ -88,5 +91,6 @@ $(window).on('load',function(){
     data.daysMilliseconds = calculateMilliseconds('14');
 	countDown('14','00','00','00');
     //test with other start value.
+
 });
 
