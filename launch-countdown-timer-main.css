@@ -184,11 +184,18 @@ body {
   color: Snow;
   color: white; }
 
+.grayish-blue-font {
+  color: LightSteelBlue;
+  color: #8486a9; }
+
 .text-center {
   text-align: center; }
 
 .text-uppercase {
   text-transform: uppercase; }
+
+.letter-spacing2 {
+  letter-spacing: 0.2em; }
 
 .img-fluid {
   max-width: 100%;
@@ -209,7 +216,7 @@ body {
 
 @media (scripting: enabled) {
   #background {
-    background: #343650 url(./images/bg-stars.svg) top left/100% 100%; }
+    background: #1e1f29 url(./images/bg-stars.svg) top left/100% 100%; }
 
   .red-thick-font {
     color: IndianRed;
