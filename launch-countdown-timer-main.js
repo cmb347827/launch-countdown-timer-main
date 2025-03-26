@@ -7,7 +7,7 @@ $(window).resize(function(){
 
 const data ={
 	 display_days: document.getElementById('days'),
-     display_hours: document.getAnimations('hours'),
+     display_hours: document.getElementById('hours'),
      display_minutes:document.getElementById('minutes'),
      display_seconds:document.getElementById('seconds'),
      daysMilliseconds: 0,
@@ -60,13 +60,14 @@ const updateValues=()=>{
     // divide by 1000 is in seconds. 
     data.secondsLeft = data.timeLeft /1000;
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
-    data.days = Math.floor((data.secondsLeft / 86400));
+    data.daysLeft = Math.floor((data.secondsLeft / 86400));
     let hoursMinutesSeconds = data.secondsLeft % 86400;
     //remainder becomes hours 
-    data.hours = Math.floor(hoursMinutesSeconds / 3600);
+    data.hoursLeft = Math.floor(hoursMinutesSeconds / 3600);
     let minutesSeconds = hoursMinutesSeconds % 3600;
-    data.minutes = Math.floor(minutesSeconds / 60);
-    data.seconds = Math.ceil(minutesSeconds % 60);
+    data.minutesLeft = Math.floor(minutesSeconds / 60);
+    data.secondsLeft = Math.ceil(minutesSeconds % 60);
+    console.log(data.hoursLeft);
     
     //update reachedZero.
 }
@@ -78,6 +79,8 @@ const addEventListeners=()=>{
           clearInterval(data.intervalId);
         }
     });
+    //if restart store time stopped in local storage, as well as starttime. difference between time stopped and startime, should be 
+    //substracted from data.timeleft and continue.
 }
 
 const startCountdown=()=>{
@@ -88,7 +91,7 @@ const startCountdown=()=>{
      }else if(data.reachedZero){
         clearInterval(data.intervalId);
      }
-    displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
+    displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft); 
 }
 
 const countDown=(days,hours,minutes,seconds)=>{
