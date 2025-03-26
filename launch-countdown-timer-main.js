@@ -24,7 +24,10 @@ const data ={
 
 
 const addLeadingZero=(string,length)=>{
-    return String(string.padStart(length,'0'));
+    if(typeof string !== String){
+        string = String(string);
+    }
+    return string.padStart(length,'0');
 }
 const displayCountdown=(days,hours,minutes,seconds)=>{
     data.display_days.textContent = addLeadingZero(days,2);
@@ -37,14 +40,13 @@ const timePassed=()=>{
     //currentime - startime
     const currentdate = new Date();
     const currentime = currentdate.getTime();
-    data.timePassed = currentime - data.startTime;
+    return currentime - data.startTime;
 }
 const updateMilliseconds=()=>{
      //data.daysMilliseconds = calculateMilliseconds(days) line 85.
      //difference between calculateMilliseconds(days) and timePassed()
-      data.timePassed = timePassed();
-      data.timeLeft = data.daysMilliseconds - data.timePassed;             
-      updateValues();
+      data.timePassed= timePassed();
+      return data.daysMilliseconds - data.timePassed;    
 }
 const calculateMilliseconds=(days)=>{
     //1 day: 24 hours : 24 * 60 = 1440 minutes * 60 = 86400 seconds * 1000 = 86400000 milliseconds
@@ -56,35 +58,44 @@ const calculateMilliseconds=(days)=>{
 const updateValues=()=>{
     //convert data.timeLeft is in milliseconds to days , hours, minutes, and seconds remaining.
     // divide by 1000 is in seconds. 
+    data.secondsLeft = data.timeLeft /1000;
+    //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
     
     //divide by 60 is minutes
     //update reachedZero.
-
+    
 }
 
+const addEventListeners=()=>{
+    document.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "spacebar") {
+            //clearInterval(intervalId);
+        }
+    });
+}
 const countDown=(days,hours,minutes,seconds)=>{
     //start countdown . At first start becomes days-1, 24 hours, 00 minutes, 00 seconds.
     displayCountdown(days,hours,minutes,seconds);
     
-    setInterval(() => {
-        if(!data.reachedZero){
-            updateMilliseconds();
-            displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
-        } else if(data.reachedZero){
-            //should be all zeros.
-            displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
-        }
-       
-    }, 1000);   //still to add delete interval id.
-
-   
-
+    
+     setInterval(() => {
+            if(!data.reachedZero){
+               const difference= updateMilliseconds();
+               data.timeLeft = difference;
+               updateValues();
+            }else if(data.reachedZero){
+                //should be all zeros.
+                displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
+            }
+        
+    }, 1000);
+    //clearInterval(intervalId);
 
 }
 
 
 $(window).on('load',function(){
-    
+    addEventListeners();
     const now= new Date();
     data.startTime = now.getTime();
     //initialize with start of 14 days.
