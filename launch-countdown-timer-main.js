@@ -19,7 +19,7 @@ const data ={
      minutesLeft:0,
      secondsLeft:0,
      reachedZero: false,
-
+     intervalId:'',
 }
 
 
@@ -60,25 +60,43 @@ const updateValues=()=>{
     // divide by 1000 is in seconds. 
     data.secondsLeft = data.timeLeft /1000;
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
+    data.days = Math.floor((data.secondsLeft / 86400));
+    let hoursMinutesSeconds = data.secondsLeft % 86400;
+    //remainder becomes hours 
+    data.hours = Math.floor(hoursMinutesSeconds / 3600);
+    let minutesSeconds = hoursMinutesSeconds % 3600;
+    data.minutes = Math.floor(minutesSeconds / 60);
+    data.seconds = Math.ceil(minutesSeconds % 60);
     
-    //divide by 60 is minutes
     //update reachedZero.
-    
 }
 
 const addEventListeners=()=>{
-    document.addEventListener("keypress", function onEvent(event) {
-        if (event.key === "spacebar") {
-            //clearInterval(intervalId);
+    document.addEventListener('keyup', (event) => {
+        console.log('event.key', event.key);
+        if (event.key === 'Enter') {
+          clearInterval(data.intervalId);
         }
     });
 }
+
+const startCountdown=()=>{
+    if(!data.reachedZero){
+        const difference= updateMilliseconds();
+        data.timeLeft = difference;
+        updateValues();
+     }else if(data.reachedZero){
+        clearInterval(data.intervalId);
+     }
+    displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
+}
+
 const countDown=(days,hours,minutes,seconds)=>{
     //start countdown . At first start becomes days-1, 24 hours, 00 minutes, 00 seconds.
     displayCountdown(days,hours,minutes,seconds);
     
     
-     setInterval(() => {
+    /* setInterval(() => {
             if(!data.reachedZero){
                const difference= updateMilliseconds();
                data.timeLeft = difference;
@@ -88,9 +106,9 @@ const countDown=(days,hours,minutes,seconds)=>{
                 displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
             }
         
-    }, 1000);
+    }, 1000);*/
     //clearInterval(intervalId);
-
+    data.intervalId = setInterval(startCountdown,1000);
 }
 
 
