@@ -10,6 +10,7 @@ const data ={
      display_hours: document.getElementById('hours'),
      display_minutes:document.getElementById('minutes'),
      display_seconds:document.getElementById('seconds'),
+     
      daysMilliseconds: 0,
      startTime: 0,
      timePassed:0,
@@ -18,8 +19,14 @@ const data ={
      hoursLeft:0,
      minutesLeft:0,
      secondsLeft:0,
+
      reachedZero: false,
      intervalId:'',
+     pausedStartTime:0,
+     pausedContinueTime:0,
+     pausedDifference: 0,
+     pause: document.getElementById('pause'),
+     paused: false,
 }
 
 
@@ -71,16 +78,25 @@ const updateValues=()=>{
     
     //update reachedZero.
 }
+const removeEventListeners=()=>{
 
+}
 const addEventListeners=()=>{
-    document.addEventListener('keyup', (event) => {
-        console.log('event.key', event.key);
-        if (event.key === 'Enter') {
-          clearInterval(data.intervalId);
+    
+    data.pause.addEventListener('click', (event) => {
+        data.paused = !(data.paused);
+        if(data.paused){
+            pauseCountdown();
+        }else if(data.paused===false){
+            //continue after pause.
+            /*const now= new Date();
+            data.pausedContinueTime = now.getTime();
+            data.pausedDifference = data.pausedContinueTime - data.pausedStartTime;
+            //continue timer , data.timeLeft - data.pausedDifference
+            data.timeLeft -= data.pausedDifference;*/
+            data.intervalId = setInterval(startCountdown,1000);
         }
     });
-    //if restart store time stopped in local storage, as well as starttime. difference between time stopped and startime, should be 
-    //substracted from data.timeleft and continue.
 }
 
 const startCountdown=()=>{
@@ -93,24 +109,17 @@ const startCountdown=()=>{
      }
     displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft); 
 }
+const pauseCountdown=()=>{
+    const now= new Date();
+    //set data.pausedStartTime as time when timer was paused at.
+    data.pausedStartTime = now.getTime();
+    data.intervalId = clearInterval(data.intervalId); //this time will be added to timeleft
+}
+
 
 const countDown=(days,hours,minutes,seconds)=>{
     //start countdown . At first start becomes days-1, 24 hours, 00 minutes, 00 seconds.
     displayCountdown(days,hours,minutes,seconds);
-    
-    
-    /* setInterval(() => {
-            if(!data.reachedZero){
-               const difference= updateMilliseconds();
-               data.timeLeft = difference;
-               updateValues();
-            }else if(data.reachedZero){
-                //should be all zeros.
-                displayCountdown(data.days,data.hours,data.minutes,data.seconds); 
-            }
-        
-    }, 1000);*/
-    //clearInterval(intervalId);
     data.intervalId = setInterval(startCountdown,1000);
 }
 
