@@ -13,6 +13,7 @@ const data ={
      
      daysMilliseconds: 0,
      startTime: 0,
+     currentTime:0,
      timePassed:0,
      timeLeft:0,
      daysLeft: 0,
@@ -26,6 +27,7 @@ const data ={
      
      pause: document.getElementById('pause'),
      paused: false,
+     skip:'dont-skip',
 }
 
 
@@ -45,8 +47,8 @@ const displayCountdown=(days,hours,minutes,seconds)=>{
 const timePassed=()=>{
     //currentime - startime
     const currentdate = new Date();
-    const currentime = currentdate.getTime();
-    return currentime - data.startTime;
+    data.currentTime= currentdate.getTime();
+    return data.currentTime - data.startTime;
 }
 const updateMilliseconds=()=>{
      //data.daysMilliseconds = calculateMilliseconds(days) line 85.
@@ -73,7 +75,6 @@ const updateValues=()=>{
     let minutesSeconds = hoursMinutesSeconds % 3600;
     data.minutesLeft = Math.floor(minutesSeconds / 60);
     data.secondsLeft = Math.ceil(minutesSeconds % 60);
-    console.log(data.hoursLeft);
     
     //update reachedZero.
 }
@@ -92,9 +93,16 @@ const addEventListeners=()=>{
                 data.pause.innerHTML= `Continue (counter): ${counter}`;
                 ++counter;
                 if(!data.paused){
+                    //calculate timeleft here now, to save about 0.5-1 seconds so counter and continuing time line up better.
+                    const currentdate = new Date();
+                    data.currentTime = currentdate.getTime();     
+                    data.timePassed= data.currentTime - data.startTime;               
+                    data.timeLeft = data.daysMilliseconds - data.timePassed;
+                    //clear counter setinterval id.
                    data.counterId=clearInterval(data.counterId);
                    data.pause.innerHTML= 'Pause';
                    counter=1;
+                   data.skip='skip';
                 }
             },1000);
         }else if(!data.paused){
@@ -108,9 +116,16 @@ const addEventListeners=()=>{
 
 const startCountdown=()=>{
     if(!data.reachedZero){
-        const difference= updateMilliseconds();
-        data.timeLeft = difference;
-        updateValues();
+        if(data.skip==='dont-skip'){
+            const difference= updateMilliseconds();                
+            data.timeLeft = difference;
+            updateValues();
+        } else if(data.skip==='skip'){
+            console.log('in here',data.timeLeft);
+            updateValues();
+            data.skip='dont-skip';
+        }
+        
      }else if(data.reachedZero){
         clearInterval(data.intervalId);
      }
