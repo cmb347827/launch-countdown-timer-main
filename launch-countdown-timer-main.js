@@ -21,10 +21,9 @@ const data ={
      secondsLeft:0,
 
      reachedZero: false,
-     intervalId:'',
-     pausedStartTime:0,
-     pausedContinueTime:0,
-     pausedDifference: 0,
+     intervalId:null,
+     counterId: null,
+     
      pause: document.getElementById('pause'),
      paused: false,
 }
@@ -78,22 +77,30 @@ const updateValues=()=>{
     
     //update reachedZero.
 }
+
 const removeEventListeners=()=>{
 
 }
 const addEventListeners=()=>{
-    
+    let counter=1;
+
     data.pause.addEventListener('click', (event) => {
         data.paused = !(data.paused);
         if(data.paused){
             pauseCountdown();
-        }else if(data.paused===false){
+            data.counterId = setInterval(()=>{
+                data.pause.innerHTML= `Continue (counter): ${counter}`;
+                ++counter;
+                if(!data.paused){
+                   data.counterId=clearInterval(data.counterId);
+                   data.pause.innerHTML= 'Pause';
+                   counter=1;
+                }
+            },1000);
+        }else if(!data.paused){
             //continue after pause.
-            /*const now= new Date();
-            data.pausedContinueTime = now.getTime();
-            data.pausedDifference = data.pausedContinueTime - data.pausedStartTime;
-            //continue timer , data.timeLeft - data.pausedDifference
-            data.timeLeft -= data.pausedDifference;*/
+            //When setInterval is restarted, updateMilliseconds (in startCountdown), calls timePassed , which gets the current time, 
+            //startTime is once again subtracted from current time , so no extra calculations needed as this difference is all that's needed.
             data.intervalId = setInterval(startCountdown,1000);
         }
     });
@@ -110,12 +117,8 @@ const startCountdown=()=>{
     displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft); 
 }
 const pauseCountdown=()=>{
-    const now= new Date();
-    //set data.pausedStartTime as time when timer was paused at.
-    data.pausedStartTime = now.getTime();
-    data.intervalId = clearInterval(data.intervalId); //this time will be added to timeleft
+    data.intervalId = clearInterval(data.intervalId); 
 }
-
 
 const countDown=(days,hours,minutes,seconds)=>{
     //start countdown . At first start becomes days-1, 24 hours, 00 minutes, 00 seconds.

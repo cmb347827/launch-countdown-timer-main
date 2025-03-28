@@ -50,7 +50,8 @@ Users should be able to:
 ### What I learned
 
 - Thought it looked like the mountain range svg had added height. So I added that
-- 
+- added pause/start button
+- added flip + sound.
  
 ### Continued development
 
