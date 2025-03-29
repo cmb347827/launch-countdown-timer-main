@@ -11,7 +11,7 @@ const data ={
      display_minutes:document.getElementById('minutes'),
      display_seconds:document.getElementById('seconds'),
      
-     daysMilliseconds: 0,
+     totalSeconds: 0,
      startTime: 0,
      currentTime:0,
      timePassed:0,
@@ -48,25 +48,62 @@ const timePassed=()=>{
     //currentime - startime
     const currentdate = new Date();
     data.currentTime= currentdate.getTime();
-    return data.currentTime - data.startTime;
+    console.log('data currentime :',data.currentTime, ' startime :', data.startTime);
+
+    if(data.currentTime > data.startTime){
+        return data.currentTime - data.startTime;
+    }else if((data.currentTime ===data.startTime) || (data.currentTime < data.startTime)){
+        return 0;
+    }
 }
-const updateMilliseconds=()=>{
+const updateSeconds=()=>{
      //data.daysMilliseconds = calculateMilliseconds(days) line 85.
      //difference between calculateMilliseconds(days) and timePassed()
       data.timePassed= timePassed();
-      return data.daysMilliseconds - data.timePassed;    
+      console.log('time passed',data.timePassed , ' total seconds', data.totalSeconds);
+      if(data.totalSeconds>0){
+           return data.totalSeconds - data.timePassed; 
+      }else if((data.totalSeconds ===0) || (data.totalSeconds < 0)){
+           return 0;
+      }
+          
 }
-const calculateMilliseconds=(days)=>{
+
+const calculateMilliseconds=(days,hours='0',minutes='0',seconds='0')=>{
     //1 day: 24 hours : 24 * 60 = 1440 minutes * 60 = 86400 seconds * 1000 = 86400000 milliseconds
     //so total number of milliseconds in number of (days) parameter.
-    const millisecondsDays = parseInt(days) * 86400000;
-    return millisecondsDays;
+    let day = parseInt(days);
+    let hour = parseInt(hours);
+    let minute = parseInt(minutes);
+    let second = parseInt(seconds);
+
+    if(second> 0){
+        data.totalSeconds += second;
+    }
+    if(minute> 0){
+        data.totalSeconds = minute * 60 + data.totalSeconds;
+    }
+    if(hour>0){
+        data.totalSeconds=  hour * 60 * 60 + data.totalSeconds;
+     }
+    if(day>0){
+        data.totalSeconds = day * 86400 + data.totalSeconds;
+    }
+    //return milliseconds
+    return data.totalSeconds * 1000;
 }
 
 const updateValues=()=>{
     //convert data.timeLeft is in milliseconds to days , hours, minutes, and seconds remaining.
-    // divide by 1000 is in seconds. 
-    data.secondsLeft = data.timeLeft /1000;
+    // divide by 1000 is in seconds, as setinterval is standard in using milliseconds .
+    data.secondsLeft = data.timeLeft/1000;
+
+    //update reachedZero if all zeros 
+    if(data.secondsLeft<=0){
+        data.secondsLeft = 0;
+        data.reachedZero=true;
+        return;
+    }
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
     data.daysLeft = Math.floor((data.secondsLeft / 86400));
     let hoursMinutesSeconds = data.secondsLeft % 86400;
@@ -76,7 +113,6 @@ const updateValues=()=>{
     data.minutesLeft = Math.floor(minutesSeconds / 60);
     data.secondsLeft = Math.ceil(minutesSeconds % 60);
     
-    //update reachedZero.
 }
 
 const removeEventListeners=()=>{
@@ -97,7 +133,7 @@ const addEventListeners=()=>{
                     const currentdate = new Date();
                     data.currentTime = currentdate.getTime();     
                     data.timePassed= data.currentTime - data.startTime;               
-                    data.timeLeft = data.daysMilliseconds - data.timePassed;
+                    data.timeLeft = data.totalSeconds - data.timePassed;
                     //clear counter setinterval id.
                    data.counterId=clearInterval(data.counterId);
                    data.pause.innerHTML= 'Pause';
@@ -117,19 +153,20 @@ const addEventListeners=()=>{
 const startCountdown=()=>{
     if(!data.reachedZero){
         if(data.skip==='dont-skip'){
-            const difference= updateMilliseconds();                
+            const difference= updateSeconds();                
             data.timeLeft = difference;
             updateValues();
         } else if(data.skip==='skip'){
-            console.log('in here',data.timeLeft);
             updateValues();
             data.skip='dont-skip';
         }
-        
+        /*if(!data.reachedZero){
+           displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
+        }*/
      }else if(data.reachedZero){
         clearInterval(data.intervalId);
-     }
-    displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft); 
+     } 
+     displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
 }
 const pauseCountdown=()=>{
     data.intervalId = clearInterval(data.intervalId); 
@@ -147,9 +184,11 @@ $(window).on('load',function(){
     const now= new Date();
     data.startTime = now.getTime();
     //initialize with start of 14 days.
-    data.daysMilliseconds = calculateMilliseconds('14');
-	countDown('14','00','00','00');
+    //data.totalSeconds = calculateMilliseconds('14');
+	//countDown('14','00','00','00');
     //test with other start value.
-
+                                              
+    data.totalSeconds = calculateMilliseconds('00','00','00','10');
+    countDown('00','00','00','10');
 });
 
