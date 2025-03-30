@@ -28,6 +28,7 @@ const data ={
      pause: document.getElementById('pause'),
      paused: false,
      skip:'dont-skip',
+     hasNan:false,
 }
 
 
@@ -48,7 +49,7 @@ const timePassed=()=>{
     //currentime - startime
     const currentdate = new Date();
     data.currentTime= currentdate.getTime();
-    console.log('data currentime :',data.currentTime, ' startime :', data.startTime);
+    //console.log('data currentime :',data.currentTime, ' startime :', data.startTime);
 
     if(data.currentTime > data.startTime){
         return data.currentTime - data.startTime;
@@ -60,7 +61,7 @@ const updateSeconds=()=>{
      //data.daysMilliseconds = calculateMilliseconds(days) line 85.
      //difference between calculateMilliseconds(days) and timePassed()
       data.timePassed= timePassed();
-      console.log('time passed',data.timePassed , ' total seconds', data.totalSeconds);
+      //console.log('time passed',data.timePassed , ' total seconds', data.totalSeconds);
       if(data.totalSeconds>0){
            return data.totalSeconds - data.timePassed; 
       }else if((data.totalSeconds ===0) || (data.totalSeconds < 0)){
@@ -68,29 +69,48 @@ const updateSeconds=()=>{
       }
           
 }
-
-const calculateMilliseconds=(days,hours='0',minutes='0',seconds='0')=>{
+const testisNan=(value)=>{
+    return Number.isNaN(parseInt(value));
+}
+const calculateMilliseconds=(...para)=>{
     //1 day: 24 hours : 24 * 60 = 1440 minutes * 60 = 86400 seconds * 1000 = 86400000 milliseconds
     //so total number of milliseconds in number of (days) parameter.
-    let day = parseInt(days);
-    let hour = parseInt(hours);
-    let minute = parseInt(minutes);
-    let second = parseInt(seconds);
+    
+    let paras= [...para];
+    console.log('paras',paras);
+    //check to make sure only numbers entered. 
+    //good practice again with rest parameters.
+    for(let el of paras){
+        let result = testisNan(el);
+        if(result){
+            //found a string that can't be parsed to int.
+            //set data.hasNan to true to skip the rest of this function and will just default to all zeros as startCountdown never runs
+            data.hasNan=true;
+            break;
+        }
+    }
+    if(!data.hasNan){
+        console.log(' not in here');
+        let day = parseInt(paras[0]);
+        let hour = parseInt(paras[1]);
+        let minute = parseInt(paras[2]);
+        let second = parseInt(paras[3]);
 
-    if(second> 0){
-        data.totalSeconds += second;
+        if(second> 0){
+            data.totalSeconds += second;
+        }
+        if(minute> 0){
+            data.totalSeconds = minute * 60 + data.totalSeconds;
+        }
+        if(hour>0){
+            data.totalSeconds=  hour * 60 * 60 + data.totalSeconds;
+        }
+        if(day>0){
+            data.totalSeconds = day * 86400 + data.totalSeconds;
+        }
+        //return milliseconds
+        return data.totalSeconds * 1000;
     }
-    if(minute> 0){
-        data.totalSeconds = minute * 60 + data.totalSeconds;
-    }
-    if(hour>0){
-        data.totalSeconds=  hour * 60 * 60 + data.totalSeconds;
-     }
-    if(day>0){
-        data.totalSeconds = day * 86400 + data.totalSeconds;
-    }
-    //return milliseconds
-    return data.totalSeconds * 1000;
 }
 
 const updateValues=()=>{
@@ -151,7 +171,8 @@ const addEventListeners=()=>{
 }
 
 const startCountdown=()=>{
-    if(!data.reachedZero){
+    if(!data.reachedZero && !(data.hasNan)){
+        displayCountdown(days,hours,minutes,seconds);
         if(data.skip==='dont-skip'){
             const difference= updateSeconds();                
             data.timeLeft = difference;
@@ -160,9 +181,6 @@ const startCountdown=()=>{
             updateValues();
             data.skip='dont-skip';
         }
-        /*if(!data.reachedZero){
-           displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
-        }*/
      }else if(data.reachedZero){
         clearInterval(data.intervalId);
      } 
@@ -174,7 +192,7 @@ const pauseCountdown=()=>{
 
 const countDown=(days,hours,minutes,seconds)=>{
     //start countdown . At first start becomes days-1, 24 hours, 00 minutes, 00 seconds.
-    displayCountdown(days,hours,minutes,seconds);
+    //displayCountdown(days,hours,minutes,seconds);
     data.intervalId = setInterval(startCountdown,1000);
 }
 
@@ -186,9 +204,13 @@ $(window).on('load',function(){
     //initialize with start of 14 days.
     //data.totalSeconds = calculateMilliseconds('14');
 	//countDown('14','00','00','00');
-    //test with other start value.
-                                              
-    data.totalSeconds = calculateMilliseconds('00','00','00','10');
-    countDown('00','00','00','10');
+
+    //test with purposely wrong value: sock
+    //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
+    //countDown('sock','01','01','10');
+
+    //test with some other values
+     data.totalSeconds = calculateMilliseconds('00','01','01','10');
+     countDown('00','01','01','10');
 });
 
