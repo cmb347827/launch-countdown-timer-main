@@ -234,6 +234,13 @@ body {
     position: relative;
     top: 1em; }
 
+  .screen {
+    background-color: DarkSlateBlue;
+    background-color: #343650;
+    width: 150px;
+    height: 150px;
+    border-radius: 15px; }
+
   main {
     height: 95vh;
     overflow: hidden; }
@@ -241,9 +248,6 @@ body {
       padding: 7em 2em; }
       main section div p {
         font-size: 1.2em; }
-      main section .screen {
-        border: 2px solid gray;
-        width: 200px; }
 
   #hills {
     position: relative;

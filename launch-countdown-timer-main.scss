@@ -7,10 +7,11 @@ $colors: (
   black: hsl(100,0%,0%),
   Soft red: hsl(345, 95%, 68%),
   Grayish blue: hsl(237, 18%, 59%),
+  Dark desaturated blue: hsl(236, 21%, 26%),
 );
 
 $fallback-colors: (
-   Snow, black, IndianRed,LightSteelBlue
+   Snow, black, IndianRed,LightSteelBlue, DarkSlateBlue
 );
 
 @mixin background($url,$position:auto,$size:auto,$repeat:no-repeat,$fixed:fixed,$color:white){
@@ -120,13 +121,19 @@ body {
          background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
       }
       .red-thick-font{
-        @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
-        font-weight: $font_weight-ultrabold;
-        font-size: 3em;
+          @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
+          font-weight: $font_weight-ultrabold;
+          font-size: 3em;
       }
       h1{
          position:relative;
          top: 1em;
+      }
+      .screen{
+          @include bg-color(map-get($colors,Dark desaturated blue),nth($fallback-colors,5));
+          width: 150px;
+          height:150px;
+          border-radius: 15px;
       }
       main{
           height: 95vh;
@@ -137,10 +144,6 @@ body {
               padding: 7em 2em;
               div p{
                  font-size:1.2em;
-              }
-              .screen{
-                 border: 2px solid gray;
-                 width: 200px;
               }
           }
       
