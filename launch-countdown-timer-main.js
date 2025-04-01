@@ -28,7 +28,7 @@ const data ={
      pause: document.getElementById('pause'),
      paused: false,
      skip:'dont-skip',
-     hasNan:false,
+     badValue:false,
 }
 
 
@@ -69,8 +69,15 @@ const updateSeconds=()=>{
       }
           
 }
-const testisNan=(value)=>{
-    return Number.isNaN(parseInt(value));
+const testisNanOrInfinite=(value)=>{
+    value = Number.isNaN(parseInt(value));  //returns false for any non-number input
+    if(!value){
+        return true;
+    }
+    value = Number.isFinite(value);          //returns false for any non-number input
+    if(!value){
+        return true;
+    }
 }
 const calculateMilliseconds=(...para)=>{
     //1 day: 24 hours : 24 * 60 = 1440 minutes * 60 = 86400 seconds * 1000 = 86400000 milliseconds
@@ -81,16 +88,19 @@ const calculateMilliseconds=(...para)=>{
     //check to make sure only numbers entered. 
     //good practice again with rest parameters.
     for(let el of paras){
-        let result = testisNan(el);
+        //Math.abs and Math.round will return NaN or Infinity if unable to convert to a positive number
+        el = Math.abs(el);
+        el = Math.round(el);
+        let result = testisNanOrInfinite(el);
         if(result){
             //found a string that can't be parsed to int.
-            //set data.hasNan to true to skip the rest of this function and will just default to all zeros as startCountdown never runs
-            data.hasNan=true;
+            //set data.badValue to true to skip the rest of this function and will just default to all zeros as startCountdown never runs
+            data.badValue=true;
             break;
         }
     }
-    if(!data.hasNan){
-        console.log(' not in here');
+    if(!data.badValue){
+        
         let day = parseInt(paras[0]);
         let hour = parseInt(paras[1]);
         let minute = parseInt(paras[2]);
@@ -171,7 +181,7 @@ const addEventListeners=()=>{
 }
 
 const startCountdown=()=>{
-    if(!data.reachedZero && !(data.hasNan)){
+    if(!data.reachedZero && !(data.badValue)){
         displayCountdown(days,hours,minutes,seconds);
         if(data.skip==='dont-skip'){
             const difference= updateSeconds();                
@@ -181,7 +191,7 @@ const startCountdown=()=>{
             updateValues();
             data.skip='dont-skip';
         }
-     }else if(data.reachedZero){
+     }else if(data.reachedZero || data.badValue){
         clearInterval(data.intervalId);
      } 
      displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
@@ -209,8 +219,15 @@ $(window).on('load',function(){
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
     //countDown('sock','01','01','10');
 
+    //test with purposely wrong value: -1
+    data.totalSeconds = calculateMilliseconds('-1','01','01','10');
+    countDown('-1','01','01','10');
+    
+     //test with purposely wrong value: -1.99
+     //data.totalSeconds = calculateMilliseconds('-1.99','01','01','10');
+     //countDown('-1.99','01','01','10');
     //test with some other values
-     data.totalSeconds = calculateMilliseconds('00','01','01','10');
-     countDown('00','01','01','10');
+    // data.totalSeconds = calculateMilliseconds('00','01','01','10');
+    // countDown('00','01','01','10');
 });
 
