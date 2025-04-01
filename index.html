@@ -6,7 +6,8 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel='stylesheet' href='launch-countdown-timer-main.css' type='text/css'>
-  
+   <!-- Preload the LCP image with a high fetchpriority so it starts loading with the stylesheet. -->
+  <link rel="preload" fetchpriority="high" as="image" href="./images/bg-stars.svg" type="image/svg+xml" >
   <title>Frontend Mentor | Launch countdown timer</title>
 
   

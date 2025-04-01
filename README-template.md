@@ -51,7 +51,7 @@ Users should be able to:
 
 - Thought it looked like the mountain range svg had added height. So I added that
 - added pause/start button with counter
-- works for any days,hours,minutes value
+- works for any days,hours,minutes value, and test for non-integer values, or Infinity.
 - added flip + sound.
  
 ### Continued development
