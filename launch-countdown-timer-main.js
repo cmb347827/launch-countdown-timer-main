@@ -49,7 +49,6 @@ const timePassed=()=>{
     //currentime - startime
     const currentdate = new Date();
     data.currentTime= currentdate.getTime();
-    //console.log('data currentime :',data.currentTime, ' startime :', data.startTime);
 
     if(data.currentTime > data.startTime){
         return data.currentTime - data.startTime;
@@ -61,7 +60,7 @@ const updateSeconds=()=>{
      //data.daysMilliseconds = calculateMilliseconds(days) line 85.
      //difference between calculateMilliseconds(days) and timePassed()
       data.timePassed= timePassed();
-      //console.log('time passed',data.timePassed , ' total seconds', data.totalSeconds);
+
       if(data.totalSeconds>0){
            return data.totalSeconds - data.timePassed; 
       }else if((data.totalSeconds ===0) || (data.totalSeconds < 0)){
@@ -70,13 +69,9 @@ const updateSeconds=()=>{
           
 }
 const testisNanOrInfinite=(value)=>{
-    value = Number.isNaN(parseInt(value));  //returns false for any non-number input
+    value = Number.isFinite(value);          //returns false for any non-number input, such as Infinity, 0/0, NaN, 'NaN' etc
     if(!value){
-        return true;
-    }
-    value = Number.isFinite(value);          //returns false for any non-number input
-    if(!value){
-        return true;
+       return true;
     }
 }
 const calculateMilliseconds=(...para)=>{
@@ -84,14 +79,16 @@ const calculateMilliseconds=(...para)=>{
     //so total number of milliseconds in number of (days) parameter.
     
     let paras= [...para];
-    console.log('paras',paras);
+    let arr=[];
     //check to make sure only numbers entered. 
     //good practice again with rest parameters.
-    for(let el of paras){
-        //Math.abs and Math.round will return NaN or Infinity if unable to convert to a positive number
-        el = Math.abs(el);
-        el = Math.round(el);
-        let result = testisNanOrInfinite(el);
+    for(let i=0;i<paras.length;++i){
+        //Math.abs and Math.round will return NaN or Infinity if unable to convert to a positive number : with text string, symbols etc
+        //-1, 1.99, -1.99 etc are converted to their positive , integer values.
+        let val = Math.abs(paras[i]);
+        val = Math.round(val);
+        arr[i] = val;
+        let result = testisNanOrInfinite(val);
         if(result){
             //found a string that can't be parsed to int.
             //set data.badValue to true to skip the rest of this function and will just default to all zeros as startCountdown never runs
@@ -101,10 +98,11 @@ const calculateMilliseconds=(...para)=>{
     }
     if(!data.badValue){
         
-        let day = parseInt(paras[0]);
-        let hour = parseInt(paras[1]);
-        let minute = parseInt(paras[2]);
-        let second = parseInt(paras[3]);
+        let day = arr[0];
+        console.log('day',day);
+        let hour = arr[1];
+        let minute = arr[2];
+        let second = arr[3];
 
         if(second> 0){
             data.totalSeconds += second;
@@ -212,20 +210,25 @@ $(window).on('load',function(){
     const now= new Date();
     data.startTime = now.getTime();
     //initialize with start of 14 days.
-    //data.totalSeconds = calculateMilliseconds('14');
-	//countDown('14','00','00','00');
+    data.totalSeconds = calculateMilliseconds('14');
+	countDown('14','00','00','00');
 
-    //test with purposely wrong value: sock
+    //test with purposely wrong value: sock , returns NaN
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
+    // countDown('sock','01','01','10');
+
+    //test with purposely wrong value: 0/0 , returns Infinity
+    //data.totalSeconds = calculateMilliseconds(0/0,'01','01','10');
     //countDown('sock','01','01','10');
 
-    //test with purposely wrong value: -1
-    data.totalSeconds = calculateMilliseconds('-1','01','01','10');
-    countDown('-1','01','01','10');
+    //test with purposely wrong value: -9, will be converted to 9
+    //data.totalSeconds = calculateMilliseconds('-9','01','01','10');
+    //countDown('-9','01','01','10');
     
-     //test with purposely wrong value: -1.99
+     //test with purposely wrong value: -1.99, will be converted to 2 
      //data.totalSeconds = calculateMilliseconds('-1.99','01','01','10');
      //countDown('-1.99','01','01','10');
+
     //test with some other values
     // data.totalSeconds = calculateMilliseconds('00','01','01','10');
     // countDown('00','01','01','10');
