@@ -116,6 +116,7 @@ body {
   opacity:1;
 }
 
+
 @media (scripting: enabled) {
       #background{
          background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
@@ -123,18 +124,32 @@ body {
       .red-thick-font{
           @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
           font-weight: $font_weight-ultrabold;
-          font-size: 3em;
+          text-shadow: 0px 2px, 2px 0px, 2px 0px;
+          font-size: 3.6em;
       }
       h1{
          position:relative;
          top: 1em;
       }
       .screen{
-          @include bg-color(map-get($colors,Dark desaturated blue),nth($fallback-colors,5));
-          width: 150px;
-          height:150px;
-          border-radius: 15px;
+            width: 150px;
+            height:150px;
+            border-radius: 15px;
+            background-color: white;
+            background-image:linear-gradient( to bottom, hsl(234, 17%, 12%), hsl(236, 21%, 26%));
+            line-height: 150px;
+            p{
+               position:relative;
+               top: -2em;
+            }
+            &:after{
+              content:'';
+              border-bottom: 2px solid hsl(234, 17%, 12%);
+              transform: translateY(-16.5em);
+              width: 100%;
+            }
       }
+      
       main{
           height: 95vh;
           overflow:hidden;
@@ -152,6 +167,13 @@ body {
           position:relative;
           top: calc(100% - 703px);
       }  
+      #ul-nav{
+          position:relative;
+          top:2em;
+          @media screen and(min-width: 768px){
+               top: 6em;
+          }
+      }
       #background-color-add-height{
           position:relative;
           top:-4px;

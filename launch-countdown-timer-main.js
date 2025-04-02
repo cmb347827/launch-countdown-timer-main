@@ -200,7 +200,7 @@ const pauseCountdown=()=>{
 
 const countDown=(days,hours,minutes,seconds)=>{
     //start countdown . At first start becomes days-1, 24 hours, 00 minutes, 00 seconds.
-    //displayCountdown(days,hours,minutes,seconds);
+    displayCountdown(days,hours,minutes,seconds);
     data.intervalId = setInterval(startCountdown,1000);
 }
 

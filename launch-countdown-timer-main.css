@@ -103,6 +103,9 @@ align-items-flex-end {
 .mt-neg-1 {
   margin-top: -0.2em; }
 
+.mt-2-em {
+  margin-top: 2em; }
+
 @media screen and (min-width: 768px) {
   .flex-noshrink-md-1 {
     flex-grow: 1;
@@ -228,18 +231,28 @@ body {
     color: IndianRed;
     color: #fb6087;
     font-weight: 900;
-    font-size: 3em; }
+    text-shadow: 0px 2px, 2px 0px, 2px 0px;
+    font-size: 3.6em; }
 
   h1 {
     position: relative;
     top: 1em; }
 
   .screen {
-    background-color: DarkSlateBlue;
-    background-color: #343650;
     width: 150px;
     height: 150px;
-    border-radius: 15px; }
+    border-radius: 15px;
+    background-color: white;
+    background-image: linear-gradient(to bottom, #191a24, #343650);
+    line-height: 150px; }
+    .screen p {
+      position: relative;
+      top: -2em; }
+    .screen:after {
+      content: '';
+      border-bottom: 2px solid #191a24;
+      transform: translateY(-16.5em);
+      width: 100%; }
 
   main {
     height: 95vh;
@@ -253,6 +266,14 @@ body {
     position: relative;
     top: calc(100% - 703px); }
 
+  #ul-nav {
+    position: relative;
+    top: 2em; } }
+  @media screen and (scripting: enabled) and (min-width: 768px) {
+    #ul-nav {
+      top: 6em; } }
+
+@media (scripting: enabled) {
   #background-color-add-height {
     position: relative;
     top: -4px;
