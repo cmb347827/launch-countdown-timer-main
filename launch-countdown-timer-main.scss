@@ -131,6 +131,9 @@ body {
          position:relative;
          top: 1em;
       }
+      .flip{
+           transform:rotatex(180deg);
+      }
       .screen{
             width: 150px;
             height:150px;
@@ -170,6 +173,9 @@ body {
       #ul-nav{
           position:relative;
           top:2em;
+          svg:hover path{
+             fill:map-get($colors,Soft red);
+          }
           @media screen and(min-width: 768px){
                top: 6em;
           }

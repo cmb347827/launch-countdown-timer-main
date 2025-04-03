@@ -29,6 +29,11 @@ const data ={
      paused: false,
      skip:'dont-skip',
      badValue:false,
+
+     dayChange: false,
+     hourChange: false,
+     minuteChange: false,
+     secondChange:false,
 }
 
 
@@ -99,7 +104,6 @@ const calculateMilliseconds=(...para)=>{
     if(!data.badValue){
         
         let day = arr[0];
-        console.log('day',day);
         let hour = arr[1];
         let minute = arr[2];
         let second = arr[3];
@@ -133,7 +137,10 @@ const updateValues=()=>{
         return;
     }
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
+    let tempDay = data.daysLeft;
     data.daysLeft = Math.floor((data.secondsLeft / 86400));
+    //if tempDay is not the same as data.daysLeft, the day screen should 'flip'. Set data.dayChange to true , in callFlips() , this will be handled.
+    
     let hoursMinutesSeconds = data.secondsLeft % 86400;
     //remainder becomes hours 
     data.hoursLeft = Math.floor(hoursMinutesSeconds / 3600);

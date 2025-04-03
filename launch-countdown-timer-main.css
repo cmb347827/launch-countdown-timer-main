@@ -238,6 +238,9 @@ body {
     position: relative;
     top: 1em; }
 
+  .flip {
+    transform: rotatex(180deg); }
+
   .screen {
     width: 150px;
     height: 150px;
@@ -268,7 +271,9 @@ body {
 
   #ul-nav {
     position: relative;
-    top: 2em; } }
+    top: 2em; }
+    #ul-nav svg:hover path {
+      fill: #fb6087; } }
   @media screen and (scripting: enabled) and (min-width: 768px) {
     #ul-nav {
       top: 6em; } }
