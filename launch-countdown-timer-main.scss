@@ -132,7 +132,8 @@ body {
          top: 1em;
       }
       .flip{
-           transform:rotatex(180deg);
+           //transform:rotatex(180deg);
+           background-color: red;
       }
       .screen{
             width: 150px;

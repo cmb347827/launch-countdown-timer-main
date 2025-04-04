@@ -20,6 +20,10 @@ const data ={
      hoursLeft:0,
      minutesLeft:0,
      secondsLeft:0,
+     previousDaysLeft:0,
+     previousHoursLeft:0,
+     previousMinutesLeft:0,
+     previousSecondsLeft:0,
 
      reachedZero: false,
      intervalId:null,
@@ -125,6 +129,16 @@ const calculateMilliseconds=(...para)=>{
     }
 }
 
+const addFlips=(change,display)=>{
+    console.log('change',change, ' display',display);
+    if(change){
+        display.className ='red-thick-font top-z-index flip';
+        //data.dayChange=false;
+    }else if(!change){ 
+        console.log('in nn');
+        display.className ='red-thick-font top-z-index';
+    }
+}
 const updateValues=()=>{
     //convert data.timeLeft is in milliseconds to days , hours, minutes, and seconds remaining.
     // divide by 1000 is in seconds, as setinterval is standard in using milliseconds .
@@ -137,17 +151,30 @@ const updateValues=()=>{
         return;
     }
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
-    let tempDay = data.daysLeft;
     data.daysLeft = Math.floor((data.secondsLeft / 86400));
-    //if tempDay is not the same as data.daysLeft, the day screen should 'flip'. Set data.dayChange to true , in callFlips() , this will be handled.
-    
+    data.dayChange = (data.daysLeft===data.previousDaysLeft)?false:true;
+    data.previousDaysLeft = data.daysLeft;
+    //if data.previousDaysleft is not the same as data.daysLeft, the day screen should 'flip'. Set data.dayChange to true 
+    addFlips(data.dayChange,data.display_days);
+
     let hoursMinutesSeconds = data.secondsLeft % 86400;
     //remainder becomes hours 
     data.hoursLeft = Math.floor(hoursMinutesSeconds / 3600);
-    let minutesSeconds = hoursMinutesSeconds % 3600;
-    data.minutesLeft = Math.floor(minutesSeconds / 60);
-    data.secondsLeft = Math.ceil(minutesSeconds % 60);
+    data.hourChange = (data.hoursLeft===data.previousHoursLeft)?false:true;
+    data.previousHoursLeft= data.hoursLeft;
+    addFlips(data.hourChange,data.display_hours);
     
+    let minutesSeconds = hoursMinutesSeconds % 3600;
+
+    data.minutesLeft = Math.floor(minutesSeconds / 60);
+    data.minuteChange = (data.minutesLeft===data.previousMinutesLeft)?false:true;
+    data.previousMinutesLeft = data.minutesLeft;
+    addFlips(data.minuteChange,data.display_minutes);
+   
+    data.secondsLeft = Math.ceil(minutesSeconds % 60);
+    data.secondChange= (data.secondsLeft===data.previousSecondsLeft)?false:true;
+    data.previousSecondsLeft = data.secondsLeft;
+    addFlips(data.secondChange,data.display_seconds);
 }
 
 const removeEventListeners=()=>{
@@ -187,7 +214,7 @@ const addEventListeners=()=>{
 
 const startCountdown=()=>{
     if(!data.reachedZero && !(data.badValue)){
-        displayCountdown(days,hours,minutes,seconds);
+        //displayCountdown(days,hours,minutes,seconds);
         if(data.skip==='dont-skip'){
             const difference= updateSeconds();                
             data.timeLeft = difference;
