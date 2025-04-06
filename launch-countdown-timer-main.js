@@ -48,10 +48,10 @@ const addLeadingZero=(string,length)=>{
     return string.padStart(length,'0');
 }
 const displayCountdown=(days,hours,minutes,seconds)=>{
-    data.display_days.textContent = addLeadingZero(days,2);
-    data.display_hours.textContent = addLeadingZero(hours,2);
-    data.display_minutes.textContent = addLeadingZero(minutes,2);
-    data.display_seconds.textContent = addLeadingZero(seconds,2);
+    data.display_days.children[0].textContent = addLeadingZero(days,2);
+    data.display_hours.children[0].textContent = addLeadingZero(hours,2);
+    data.display_minutes.children[0].textContent = addLeadingZero(minutes,2);
+    data.display_seconds.children[0].textContent = addLeadingZero(seconds,2);
 }
 
 const timePassed=()=>{
@@ -130,14 +130,26 @@ const calculateMilliseconds=(...para)=>{
 }
 
 const addFlips=(change,display)=>{
-    console.log('change',change, ' display',display);
-    if(change){
-        display.className ='red-thick-font top-z-index flip';
-        //data.dayChange=false;
-    }else if(!change){ 
-        console.log('in nn');
-        display.className ='red-thick-font top-z-index';
-    }
+        if(change){
+                
+               //display.children[0].className=' flipTop';
+           // display.className ='red-thick-font top-z-index flip';
+            display.className ='red-thick-font top-z-index flipIn';
+            // display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen flipBottom';
+            const timer =setTimeout(() => {
+                display.className='red-thick-font top-z-index flipOut';
+                //display.className ='red-thick-font top-z-index flipafter';
+                //display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen flipAfter';
+            }, 500)
+            //clearTimeout(timer);
+
+        }else if(!change){ 
+            display.className ='red-thick-font top-z-index';
+            //display.children[0].className='';
+            //display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen ';
+            
+            //display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen ';
+        }
 }
 const updateValues=()=>{
     //convert data.timeLeft is in milliseconds to days , hours, minutes, and seconds remaining.

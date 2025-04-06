@@ -238,9 +238,26 @@ body {
     position: relative;
     top: 1em; }
 
-  .flip {
-    background-color: red; }
+  .flipIn {
+    border-top: 2px solid black;
+    width: 100%;
+    text-align: center;
+    animation: flipIn 0.5s; }
 
+  .flipOut {
+    border-top: none;
+    animation: flipOut 0.5s; }
+
+  @keyframes flipIn {
+    0% {
+      transform: rotateX(0deg); }
+    100% {
+      transform: rotateX(180deg); } }
+  @keyframes flipOut {
+    0% {
+      transform: rotateX(90deg); }
+    100% {
+      transform: rotate(0deg); } }
   .screen {
     width: 150px;
     height: 150px;
@@ -256,6 +273,14 @@ body {
       border-bottom: 2px solid #191a24;
       transform: translateY(-16.5em);
       width: 100%; }
+
+  div.flip > p {
+    position: relative;
+    top: -6em; }
+
+  div.flip > div {
+    position: relative;
+    top: -1.2em; }
 
   main {
     height: 95vh;
