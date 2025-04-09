@@ -28,6 +28,8 @@ const data ={
      reachedZero: false,
      intervalId:null,
      counterId: null,
+     timerId:null,
+     soundId:null,
      
      pause: document.getElementById('pause'),
      paused: false,
@@ -38,6 +40,10 @@ const data ={
      hourChange: false,
      minuteChange: false,
      secondChange:false,
+
+     tick_audio: document.getElementById('audio'),
+     sound: document.getElementById('sound'),
+     playSound: false,
 }
 
 
@@ -128,27 +134,28 @@ const calculateMilliseconds=(...para)=>{
         return data.totalSeconds * 1000;
     }
 }
-
+const startStopSound=()=>{
+    //starts as data.playSound=false; then toggled.
+    if(data.playSound){
+        data.tick_audio.play()
+    }else if(!data.playSound){
+        //on stop clearinterval soundId
+        audio.load()
+        data.soundId= clearInterval(data.soundId);
+    }
+}
+const toggleSound=()=>{
+     data.playSound = !(data.playSound);
+     data.soundId=setInterval(startStopSound,1000);
+}
 const addFlips=(change,display)=>{
         if(change){
-                
-               //display.children[0].className=' flipTop';
-           // display.className ='red-thick-font top-z-index flip';
             display.className ='red-thick-font top-z-index flipIn';
-            // display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen flipBottom';
-            const timer =setTimeout(() => {
+            data.timerId =setTimeout(() => {
                 display.className='red-thick-font top-z-index flipOut';
-                //display.className ='red-thick-font top-z-index flipafter';
-                //display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen flipAfter';
-            }, 500)
-            //clearTimeout(timer);
-
+            },500);
         }else if(!change){ 
             display.className ='red-thick-font top-z-index';
-            //display.children[0].className='';
-            //display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen ';
-            
-            //display.parentElement.className ='display-flex direction-column justify-content-flex-start align-items-center me-2 screen ';
         }
 }
 const updateValues=()=>{
@@ -160,6 +167,7 @@ const updateValues=()=>{
     if(data.secondsLeft<=0){
         data.secondsLeft = 0;
         data.reachedZero=true;
+        clearTimeout(data.timerId);
         return;
     }
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
@@ -190,38 +198,46 @@ const updateValues=()=>{
 }
 
 const removeEventListeners=()=>{
-
+    //remove data.pause addEventListener
+    data.pause.removeEventListener('click',duringPause, false);
+    data.sound.removeEventListener('click',toggleSound,false);
 }
-const addEventListeners=()=>{
+const duringPause=()=>{
     let counter=1;
 
-    data.pause.addEventListener('click', (event) => {
-        data.paused = !(data.paused);
-        if(data.paused){
-            pauseCountdown();
-            data.counterId = setInterval(()=>{
-                data.pause.innerHTML= `Continue (counter): ${counter}`;
-                ++counter;
-                if(!data.paused){
-                    //calculate timeleft here now, to save about 0.5-1 seconds so counter and continuing time line up better.
-                    const currentdate = new Date();
-                    data.currentTime = currentdate.getTime();     
-                    data.timePassed= data.currentTime - data.startTime;               
-                    data.timeLeft = data.totalSeconds - data.timePassed;
-                    //clear counter setinterval id.
-                   data.counterId=clearInterval(data.counterId);
-                   data.pause.innerHTML= 'Pause';
-                   counter=1;
-                   data.skip='skip';
-                }
-            },1000);
-        }else if(!data.paused){
-            //continue after pause.
-            //When setInterval is restarted, updateMilliseconds (in startCountdown), calls timePassed , which gets the current time, 
-            //startTime is once again subtracted from current time , so no extra calculations needed as this difference is all that's needed.
-            data.intervalId = setInterval(startCountdown,1000);
-        }
-    });
+    data.paused = !(data.paused);
+    if(data.paused){
+        pauseCountdown();
+        data.counterId = setInterval(()=>{
+            data.pause.innerHTML= `Continue (counter): ${counter}`;
+            ++counter;
+            if(!data.paused){
+                //clear counter setinterval id.
+                data.counterId=clearInterval(data.counterId);
+                data.pause.innerHTML= `Continue (counter): ${++counter}`;
+                data.pause.innerHTML= 'Pause';
+                counter=1;
+                data.skip='skip';
+                //calculate timeleft here now, to save about 0.5-1 seconds so counter and continuing time line up better.
+                const currentdate = new Date();
+                data.currentTime = currentdate.getTime();     
+                data.timePassed= data.currentTime - data.startTime;               
+                data.timeLeft = data.totalSeconds - data.timePassed;
+            }
+        },1000);
+    }else if(!data.paused){
+        //continue after pause.
+        //When setInterval is restarted, updateMilliseconds (in startCountdown), calls timePassed , which gets the current time, 
+        //startTime is once again subtracted from current time , so no extra calculations needed as this difference is all that's needed.
+        data.intervalId = setInterval(startCountdown,1000);
+    }
+}
+const addEventListeners=()=>{
+
+    data.pause.addEventListener('click', duringPause,false);
+    //because the user starts/stops the sound, it won't be tuned in properly with the clock flips , as the sound will be started/stopped at random times.
+    //the user can start/stop the audio as a browsers requirement, vs autoplay.
+    data.sound.addEventListener('click', toggleSound, false);
 }
 
 const startCountdown=()=>{
@@ -237,6 +253,7 @@ const startCountdown=()=>{
         }
      }else if(data.reachedZero || data.badValue){
         clearInterval(data.intervalId);
+        removeEventListeners();
      } 
      displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
 }
@@ -255,9 +272,10 @@ $(window).on('load',function(){
     addEventListeners();
     const now= new Date();
     data.startTime = now.getTime();
+
     //initialize with start of 14 days.
-    data.totalSeconds = calculateMilliseconds('14');
-	countDown('14','00','00','00');
+    //data.totalSeconds = calculateMilliseconds('14');
+	//countDown('14','00','00','00');
 
     //test with purposely wrong value: sock , returns NaN
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
@@ -276,7 +294,10 @@ $(window).on('load',function(){
      //countDown('-1.99','01','01','10');
 
     //test with some other values
-    // data.totalSeconds = calculateMilliseconds('00','01','01','10');
+     //data.totalSeconds = calculateMilliseconds('00','01','01','10');
     // countDown('00','01','01','10');
+
+    data.totalSeconds = calculateMilliseconds('00','00','01','10');
+     countDown('00','00','01','10');
 });
 

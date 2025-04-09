@@ -133,14 +133,17 @@ body {
       }
       
       .flipIn {
-          border-top: 2px solid black;
+          border: 2px solid hsl(236, 21%, 26%);
+          background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
+          color:#2F2439;
           width: 100%;
+          height:150px;
           text-align:center;
-          animation: flipIn 0.5s;
+          animation: flipIn 0.5s ease-in;
       }
       .flipOut{
           border-top:none;
-          animation: flipOut 0.5s;
+          animation: flipOut 0.5s ease-out;
       }
       
       @keyframes flipIn {
@@ -153,7 +156,7 @@ body {
       }
       @keyframes flipOut{
         0%{
-            transform: rotateX(90deg);
+            transform: rotateX(-180deg);
         }
         100%{
             transform: rotate(0deg);
@@ -162,6 +165,7 @@ body {
       .screen{
             width: 150px;
             height:150px;
+            //perspective: 1000px;
             border-radius: 15px;
             background-color: white;
             background-image:linear-gradient( to bottom, hsl(234, 17%, 12%), hsl(236, 21%, 26%));

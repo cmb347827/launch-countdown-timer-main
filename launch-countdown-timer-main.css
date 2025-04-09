@@ -49,7 +49,7 @@
 .align-items-flex-start {
   align-items: flex-start; }
 
-align-items-flex-end {
+.align-items-flex-end {
   align-items: flex-end; }
 
 .align-items-stretch {
@@ -239,14 +239,17 @@ body {
     top: 1em; }
 
   .flipIn {
-    border-top: 2px solid black;
+    border: 2px solid #343650;
+    background-image: linear-gradient(to bottom, #0f0f14, #343650);
+    color: #2F2439;
     width: 100%;
+    height: 150px;
     text-align: center;
-    animation: flipIn 0.5s; }
+    animation: flipIn 0.5s ease-in; }
 
   .flipOut {
     border-top: none;
-    animation: flipOut 0.5s; }
+    animation: flipOut 0.5s ease-out; }
 
   @keyframes flipIn {
     0% {
@@ -255,7 +258,7 @@ body {
       transform: rotateX(180deg); } }
   @keyframes flipOut {
     0% {
-      transform: rotateX(90deg); }
+      transform: rotateX(-180deg); }
     100% {
       transform: rotate(0deg); } }
   .screen {
