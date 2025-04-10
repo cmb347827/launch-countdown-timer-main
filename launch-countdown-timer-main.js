@@ -44,6 +44,8 @@ const data ={
      tick_audio: document.getElementById('audio'),
      sound: document.getElementById('sound'),
      playSound: false,
+
+     count:0,
 }
 
 
@@ -191,7 +193,7 @@ const updateValues=()=>{
     data.previousMinutesLeft = data.minutesLeft;
     addFlips(data.minuteChange,data.display_minutes);
    
-    data.secondsLeft = Math.ceil(minutesSeconds % 60);
+    data.secondsLeft = Math.round((minutesSeconds % 60).toFixed(2));
     data.secondChange= (data.secondsLeft===data.previousSecondsLeft)?false:true;
     data.previousSecondsLeft = data.secondsLeft;
     addFlips(data.secondChange,data.display_seconds);
@@ -202,7 +204,7 @@ const removeEventListeners=()=>{
     data.pause.removeEventListener('click',duringPause, false);
     data.sound.removeEventListener('click',toggleSound,false);
 }
-const duringPause=()=>{
+const duringPause=()=>{                                                     
     let counter=1;
 
     data.paused = !(data.paused);
@@ -223,6 +225,11 @@ const duringPause=()=>{
                 data.currentTime = currentdate.getTime();     
                 data.timePassed= data.currentTime - data.startTime;               
                 data.timeLeft = data.totalSeconds - data.timePassed;
+                //timer was paused so long that there's no time left, set display to all zeros and stop the timer.
+                if(data.timeLeft<0){
+                    data.badValue=true;
+                    displayCountdown('00','00','00','00');
+                }
             }
         },1000);
     }else if(!data.paused){
@@ -297,7 +304,7 @@ $(window).on('load',function(){
      //data.totalSeconds = calculateMilliseconds('00','01','01','10');
     // countDown('00','01','01','10');
 
-    data.totalSeconds = calculateMilliseconds('00','00','01','10');
-     countDown('00','00','01','10');
+    data.totalSeconds = calculateMilliseconds('00','00','01','05');
+     countDown('00','00','01','05');
 });
 
