@@ -189,11 +189,17 @@ const updateValues=()=>{
     let minutesSeconds = hoursMinutesSeconds % 3600;
 
     data.minutesLeft = Math.floor(minutesSeconds / 60);
+    data.secondsLeft = Math.round((minutesSeconds % 60).toFixed(2));
+    if(data.minutesLeft ===0 && data.secondsLeft===60){
+        //instread of 00-60 , convert to 01-00
+        data.minutesLeft=1;
+        data.secondsLeft=0;
+    }
     data.minuteChange = (data.minutesLeft===data.previousMinutesLeft)?false:true;
     data.previousMinutesLeft = data.minutesLeft;
     addFlips(data.minuteChange,data.display_minutes);
    
-    data.secondsLeft = Math.round((minutesSeconds % 60).toFixed(2));
+    //data.secondsLeft = Math.round((minutesSeconds % 60).toFixed(2));
     data.secondChange= (data.secondsLeft===data.previousSecondsLeft)?false:true;
     data.previousSecondsLeft = data.secondsLeft;
     addFlips(data.secondChange,data.display_seconds);
@@ -226,9 +232,13 @@ const duringPause=()=>{
                 data.timePassed= data.currentTime - data.startTime;               
                 data.timeLeft = data.totalSeconds - data.timePassed;
                 //timer was paused so long that there's no time left, set display to all zeros and stop the timer.
-                if(data.timeLeft<0){
+                if(data.timeLeft<=0){
                     data.badValue=true;
-                    displayCountdown('00','00','00','00');
+                    data.reachedZero=true;
+                    data.secondsLeft=0;
+                    data.minutesLeft=0;
+                    data.hoursLeft=0;
+                    data.daysLeft=0;
                 }
             }
         },1000);
