@@ -275,7 +275,8 @@ body {
       content: '';
       border-bottom: 2px solid #191a24;
       transform: translateY(-16.5em);
-      width: 100%; }
+      width: 100%;
+      z-index: 99; }
 
   div.flip > p {
     position: relative;
@@ -296,6 +297,9 @@ body {
   #hills {
     position: relative;
     top: calc(100% - 703px); }
+
+  ul {
+    list-style-type: none; }
 
   #ul-nav {
     position: relative;

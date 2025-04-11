@@ -174,24 +174,38 @@ const updateValues=()=>{
     }
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
     data.daysLeft = Math.floor((data.secondsLeft / 86400));
+    let hoursMinutesSeconds = data.secondsLeft % 86400;
+    //remainder becomes hours 
+    data.hoursLeft = Math.floor(hoursMinutesSeconds / 3600);
+    if(data.daysLeft ===0 && data.hoursLeft===24){
+        //instread of 00-24-.., convert to 01-00-..
+        data.daysLeft=1;
+        data.hoursLeft=0;
+    }
+
     data.dayChange = (data.daysLeft===data.previousDaysLeft)?false:true;
     data.previousDaysLeft = data.daysLeft;
     //if data.previousDaysleft is not the same as data.daysLeft, the day screen should 'flip'. Set data.dayChange to true 
     addFlips(data.dayChange,data.display_days);
 
-    let hoursMinutesSeconds = data.secondsLeft % 86400;
-    //remainder becomes hours 
-    data.hoursLeft = Math.floor(hoursMinutesSeconds / 3600);
+    let minutesSeconds = hoursMinutesSeconds % 3600;
+    data.minutesLeft = Math.floor(minutesSeconds / 60);
+    if(data.hoursLeft ===0 && data.minutesLeft===60){
+        //instread of 00-60-.., convert to 01-00-..
+        data.hoursLeft=1;
+        data.minutesLeft=0;
+    }
+
     data.hourChange = (data.hoursLeft===data.previousHoursLeft)?false:true;
     data.previousHoursLeft= data.hoursLeft;
     addFlips(data.hourChange,data.display_hours);
     
-    let minutesSeconds = hoursMinutesSeconds % 3600;
-
-    data.minutesLeft = Math.floor(minutesSeconds / 60);
-    data.secondsLeft = Math.round((minutesSeconds % 60).toFixed(2));
-    if(data.minutesLeft ===0 && data.secondsLeft===60){
-        //instread of 00-60 , convert to 01-00
+    //console.log('%60: ',minutesSeconds % 60, ' match ceil:', Math.ceil(minutesSeconds % 60));
+    
+    data.secondsLeft = Math.ceil((minutesSeconds % 60).toFixed(2));   
+    //fix, so it goes go from 00-02-01-01 to 00-02-01-00 , instead of 00-02-00-60.
+    //but now it goes from 00-02-01-00 to 00-02-00-59 , instead of 00-02-00-60
+     if(data.minutesLeft===0 && data.secondsLeft===60 ){                  
         data.minutesLeft=1;
         data.secondsLeft=0;
     }
@@ -199,10 +213,10 @@ const updateValues=()=>{
     data.previousMinutesLeft = data.minutesLeft;
     addFlips(data.minuteChange,data.display_minutes);
    
-    //data.secondsLeft = Math.round((minutesSeconds % 60).toFixed(2));
     data.secondChange= (data.secondsLeft===data.previousSecondsLeft)?false:true;
     data.previousSecondsLeft = data.secondsLeft;
     addFlips(data.secondChange,data.display_seconds);
+    
 }
 
 const removeEventListeners=()=>{
@@ -311,10 +325,9 @@ $(window).on('load',function(){
      //countDown('-1.99','01','01','10');
 
     //test with some other values
-     //data.totalSeconds = calculateMilliseconds('00','01','01','10');
-    // countDown('00','01','01','10');
+     data.totalSeconds = calculateMilliseconds('00','02','01','10');
+     countDown('00','02','01','10');
 
-    data.totalSeconds = calculateMilliseconds('00','00','01','05');
-     countDown('00','00','01','05');
+    
 });
 

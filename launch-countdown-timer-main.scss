@@ -179,6 +179,7 @@ body {
               border-bottom: 2px solid hsl(234, 17%, 12%);
               transform: translateY(-16.5em);
               width: 100%;
+              z-index:99;
             }
       }
       div.flip > p{
@@ -207,6 +208,9 @@ body {
           position:relative;
           top: calc(100% - 703px);
       }  
+      ul {
+        list-style-type: none;
+      }
       #ul-nav{
           position:relative;
           top:2em;
