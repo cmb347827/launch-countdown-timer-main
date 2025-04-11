@@ -30,6 +30,7 @@ const data ={
      counterId: null,
      timerId:null,
      soundId:null,
+     timeoutId:null,
      
      pause: document.getElementById('pause'),
      paused: false,
@@ -281,6 +282,7 @@ const startCountdown=()=>{
         }
      }else if(data.reachedZero || data.badValue){
         clearInterval(data.intervalId);
+        clearTimeout(data.timeoutId);
         removeEventListeners();
      } 
      displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
@@ -296,10 +298,10 @@ const countDown=(days,hours,minutes,seconds)=>{
 }
 
 const startTimer=(arrs)=>{
-    
-    const [days,hours,minutes,seconds]=[...arrs];
+    const [days,hours,minutes,seconds]=arrs;
     data.totalSeconds = calculateMilliseconds(days);
-	countDown(days,hours,minutes,seconds);   
+	countDown(days,hours,minutes,seconds);  
+    
 }
 
 
@@ -311,9 +313,7 @@ $(window).on('load',function(){
     //initialize with start of 14 days.
     const arr=['14','00','00','00'];
     displayCountdown('14','00','00','00')
-    const timeoutId = setTimeout(startTimer, 3000,arr);
-    clearTimeout(timeoutId);
-    
+    data.timeoutId = setTimeout(startTimer, 5000,arr);
 
     //test with purposely wrong value: sock , returns NaN
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
@@ -332,7 +332,7 @@ $(window).on('load',function(){
      //countDown('-1.99','01','01','10');
 
     //test with some other values
-    // data.totalSeconds = calculateMilliseconds('00','01','01','10');
+     //data.totalSeconds = calculateMilliseconds('00','01','01','10');
     // countDown('00','01','01','10');
 
     
