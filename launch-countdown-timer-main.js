@@ -295,6 +295,13 @@ const countDown=(days,hours,minutes,seconds)=>{
     data.intervalId = setInterval(startCountdown,1000);
 }
 
+const startTimer=(arrs)=>{
+    
+    const [days,hours,minutes,seconds]=[...arrs];
+    data.totalSeconds = calculateMilliseconds(days);
+	countDown(days,hours,minutes,seconds);   
+}
+
 
 $(window).on('load',function(){
     addEventListeners();
@@ -302,8 +309,11 @@ $(window).on('load',function(){
     data.startTime = now.getTime();
 
     //initialize with start of 14 days.
-    data.totalSeconds = calculateMilliseconds('14');
-	countDown('14','00','00','00');
+    const arr=['14','00','00','00'];
+    displayCountdown('14','00','00','00')
+    const timeoutId = setTimeout(startTimer, 3000,arr);
+    clearTimeout(timeoutId);
+    
 
     //test with purposely wrong value: sock , returns NaN
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
