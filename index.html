@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel='stylesheet' href='launch-countdown-timer-main.css' type='text/css'>
    <!-- Preload the LCP image with a high fetchpriority so it starts loading with the stylesheet. -->
-  <link rel="preload" fetchpriority="high" as="image" href="./images/bg-stars.svg" type="image/svg+xml" >
+  <link rel="preload" as="image" href="./images/bg-stars.svg" type="image/svg+xml" >
   <title>Frontend Mentor | Launch countdown timer</title>
 
   
@@ -20,29 +20,30 @@
               <main>
                         
                     <section class="display-flex justify-content-center align-items-center">
+                            <h1 class="sr-only">Timer Countdown</h1>
                             <div class="display-flex direction-column justify-content-flex-start align-items-center me-2 screen ">
                                 <div id='days' class="red-thick-font top-z-index">
                                     <span>00</span>
                                 </div>
-                                <p class="text-uppercase grayish-blue-font">Days</p>
+                                <p class="text-uppercase grayish-blue-font letter-spacing2">Days</p>
                             </div>
                             <div class="display-flex direction-column justify-content-flex-start align-items-center me-2 screen">
                                 <div id='hours' class="red-thick-font top-z-index">
                                     <span>00</span>
                                 </div>
-                                <p class="text-uppercase grayish-blue-font">Hours</p>
+                                <p class="text-uppercase grayish-blue-font letter-spacing2">Hours</p>
                             </div>
                             <div class="display-flex direction-column justify-content-flex-start align-items-center me-2 screen">
                                 <div id='minutes' class="red-thick-font top-z-index">
                                     <span>00</span>
                                 </div>
-                                <p class="text-uppercase grayish-blue-font">Minutes</p>
+                                <p class="text-uppercase grayish-blue-font letter-spacing2">Minutes</p>
                             </div>
                             <div class="display-flex direction-column justify-content-flex-start align-items-center me-2 screen">
                                   <div id='seconds' class="red-thick-font top-z-index ">
                                         <span>00</span>
                                   </div>
-                                  <p class="text-uppercase grayish-blue-font">Seconds</p>
+                                  <p class="text-uppercase grayish-blue-font letter-spacing2">Seconds</p>
                             </div>
                     </section>
                             
