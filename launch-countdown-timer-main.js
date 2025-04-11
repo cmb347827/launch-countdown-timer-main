@@ -200,11 +200,8 @@ const updateValues=()=>{
     data.previousHoursLeft= data.hoursLeft;
     addFlips(data.hourChange,data.display_hours);
     
-    //console.log('%60: ',minutesSeconds % 60, ' match ceil:', Math.ceil(minutesSeconds % 60));
-    
     data.secondsLeft = Math.ceil((minutesSeconds % 60).toFixed(2));   
     //fix, so it goes go from 00-02-01-01 to 00-02-01-00 , instead of 00-02-00-60.
-    //but now it goes from 00-02-01-00 to 00-02-00-59 , instead of 00-02-00-60
      if(data.minutesLeft===0 && data.secondsLeft===60 ){                  
         data.minutesLeft=1;
         data.secondsLeft=0;
@@ -305,8 +302,8 @@ $(window).on('load',function(){
     data.startTime = now.getTime();
 
     //initialize with start of 14 days.
-    //data.totalSeconds = calculateMilliseconds('14');
-	//countDown('14','00','00','00');
+    data.totalSeconds = calculateMilliseconds('14');
+	countDown('14','00','00','00');
 
     //test with purposely wrong value: sock , returns NaN
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
@@ -325,8 +322,8 @@ $(window).on('load',function(){
      //countDown('-1.99','01','01','10');
 
     //test with some other values
-     data.totalSeconds = calculateMilliseconds('00','02','01','10');
-     countDown('00','02','01','10');
+    // data.totalSeconds = calculateMilliseconds('00','01','01','10');
+    // countDown('00','01','01','10');
 
     
 });
