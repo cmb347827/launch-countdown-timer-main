@@ -124,8 +124,10 @@ body {
       .red-thick-font{
           @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
           font-weight: $font_weight-ultrabold;
-          text-shadow: 0px 2px, 2px 0px, 2px 0px;
-          font-size: 3.6em;
+          font-size: 2em;
+          @media screen and(min-width:768px){
+              font-size:5.6em;
+          }
       }
       h1{
          position:relative;
@@ -137,9 +139,12 @@ body {
           background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
           color:#2F2439;
           width: 100%;
-          height:150px;
+          height:8em;
           text-align:center;
           animation: flipIn 0.5s ease-in;
+          @media screen and(min-width:768px){
+              height:12em;
+          }
       }
       .flipOut{
           border-top:none;
@@ -163,9 +168,9 @@ body {
         }
     }
       .screen{
-            width: 150px;
-            height:150px;
-            //perspective: 1000px;
+            width: 8em;
+            height: 8em;
+            min-width: 0;
             border-radius: 15px;
             background-color: white;
             background-image:linear-gradient( to bottom, hsl(234, 17%, 12%), hsl(236, 21%, 26%));
@@ -180,6 +185,10 @@ body {
               transform: translateY(-16.5em);
               width: 100%;
               z-index:99;
+            }
+            @media screen and (min-width:768px){
+                  width: 12em;
+                  height:12em;
             }
       }
       div.flip > p{

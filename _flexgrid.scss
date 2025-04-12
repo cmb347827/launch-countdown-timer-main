@@ -116,6 +116,18 @@
 .mt-2-em{
      margin-top:2em;
 }
+.mt-3-em{
+    margin-top: 3em;
+}
+.mt-4-em{
+    margin-top: 4em;
+}
+.mt-5-em{
+    margin-top: 5em;
+}
+.mb-5-em{
+    margin-bottom: 5em;
+}
 .flex-noshrink-md-1{
     @media screen and(min-width:768px){
         flex-grow:1;
@@ -124,6 +136,9 @@
 }
 .flex-basis-25{
     flex-basis:25%;
+}
+.flex-1{
+    flex:1;
 }
 .flex-basis-40{
     flex-basis: 40%;

@@ -20,6 +20,7 @@ const data ={
      hoursLeft:0,
      minutesLeft:0,
      secondsLeft:0,
+     secondsFloorAdd:0,
      previousDaysLeft:0,
      previousHoursLeft:0,
      previousMinutesLeft:0,
@@ -174,10 +175,13 @@ const updateValues=()=>{
         return;
     }
     //convert secondsleft to number of days first, then hours, then minutes, and what's left is data.secondsLeft
-    data.daysLeft = Math.floor((data.secondsLeft / 86400));
-    let hoursMinutesSeconds = data.secondsLeft % 86400;
-    //remainder becomes hours 
+    //days left
+    data.daysLeft= Math.floor(data.secondsLeft/86400);
+
+    let hoursMinutesSeconds = data.secondsLeft % 86400;                //divide by modules each time saves the discard lost with earlier divide.
+    //above remainder becomes hours,minutes, and seconds
     data.hoursLeft = Math.floor(hoursMinutesSeconds / 3600);
+                      
     if(data.daysLeft ===0 && data.hoursLeft===24){
         //instread of 00-24-.., convert to 01-00-..
         data.daysLeft=1;
@@ -189,6 +193,7 @@ const updateValues=()=>{
     //if data.previousDaysleft is not the same as data.daysLeft, the day screen should 'flip'. Set data.dayChange to true 
     addFlips(data.dayChange,data.display_days);
 
+    //remainder becomes minutes and seconds.
     let minutesSeconds = hoursMinutesSeconds % 3600;
     data.minutesLeft = Math.floor(minutesSeconds / 60);
     if(data.hoursLeft ===0 && data.minutesLeft===60){
@@ -201,9 +206,10 @@ const updateValues=()=>{
     data.previousHoursLeft= data.hoursLeft;
     addFlips(data.hourChange,data.display_hours);
     
-    data.secondsLeft = Math.ceil((minutesSeconds % 60).toFixed(2));   
+    data.secondsLeft = Math.round((minutesSeconds % 60));
     //fix, so it goes go from 00-02-01-01 to 00-02-01-00 , instead of 00-02-00-60.
-     if(data.minutesLeft===0 && data.secondsLeft===60 ){                  
+    //is acceptable that the timer goes from  for instance from 09-08-22-01 to 09-08-21-60  as 21-60 is the same amount of time as 22-00
+    if(data.minutesLeft===0 && data.secondsLeft===60 ){                  
         data.minutesLeft=1;
         data.secondsLeft=0;
     }
@@ -299,21 +305,20 @@ const countDown=(days,hours,minutes,seconds)=>{
 
 const startTimer=(arrs)=>{
     const [days,hours,minutes,seconds]=arrs;
+    const now= new Date();
+    data.startTime = now.getTime();
     data.totalSeconds = calculateMilliseconds(days);
 	countDown(days,hours,minutes,seconds);  
-    
 }
 
 
 $(window).on('load',function(){
     addEventListeners();
-    const now= new Date();
-    data.startTime = now.getTime();
 
     //initialize with start of 14 days.
     const arr=['14','00','00','00'];
     displayCountdown('14','00','00','00')
-    data.timeoutId = setTimeout(startTimer, 5000,arr);
+    data.timeoutId = setTimeout(startTimer, 1000,arr);
 
     //test with purposely wrong value: sock , returns NaN
     //data.totalSeconds = calculateMilliseconds('sock','01','01','10');
