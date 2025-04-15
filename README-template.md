@@ -49,10 +49,11 @@ Users should be able to:
 
 ### What I learned
 
-- Thought it looked like the mountain range svg had added height. So I added that
-- added pause/start button with counter
-- works for any days,hours,minutes value, and test for non-integer values, or Infinity.
-- added flip + sound.
+- Thought it looked like the mountain range svg had added height. So I added that at the bottom using an empty div and a class in the scss file.
+- For added practice I added a pause/start button with counter, that continues after a certain amount of time has expired , and continues where the timer should , so no time is lost.
+- It  works for any days,hours,minutes value, and test for non-integer values, or Infinity this can be changed in the onload function.
+- I added the bonus flip , though it's more of a pseudo flip, it looks like a flip and I added , for pracice, a add/remove sound.
+  button. I first wanted the app to automatically load a sound and play on each flip, but as I soon learned it's not advisable, as it could be annoying to users. So I added the button instead. It's impossible to align the sound to the flip this way though.
  
 ### Continued development
 
