@@ -176,7 +176,7 @@ html,
 body {
   font-font-size: 1em;
   font-weight: 400;
-  font-family: "./fonts/League Spartan", serif; }
+  font-family: "./fonts/redhattext.ttf", serif; }
 
 .sr-only {
   border: 0 !important;
@@ -250,7 +250,7 @@ body {
   right: 7vw; }
   @media screen and (min-width: 768px) {
     .circle:before {
-      bottom: 2vh;
+      bottom: 2.5vh;
       right: 7vw; } }
 
 .circle:after {
@@ -258,7 +258,7 @@ body {
   left: 7vw; }
   @media screen and (min-width: 768px) {
     .circle:after {
-      bottom: 2vh;
+      bottom: 2.5vh;
       right: 7vw; } }
 
 @media (scripting: enabled) {

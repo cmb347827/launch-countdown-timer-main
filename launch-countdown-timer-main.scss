@@ -45,7 +45,7 @@ body {
   font: {
      font-size: 1em;
      weight: $font_weight-normal;
-	   family: "./fonts/League Spartan", serif;
+	   family: "./fonts/redhattext.ttf", serif;
   }
   
 }
@@ -126,7 +126,7 @@ body {
     bottom:1vh;
     right: 7vw;
     @media screen and(min-width:768px){
-       bottom:2vh;
+       bottom:2.5vh;
        right: 7vw;
     }
 }
@@ -135,7 +135,7 @@ body {
     bottom:1vh;
     left: 7vw; 
     @media screen and(min-width:768px){
-      bottom:2vh;
+      bottom:2.5vh;
       right: 7vw;
     }
 }
