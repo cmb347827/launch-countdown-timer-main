@@ -174,8 +174,6 @@
 
 html,
 body {
-  color: black;
-  color: black;
   font-font-size: 1em;
   font-weight: 400;
   font-family: "./fonts/League Spartan", serif; }
@@ -238,6 +236,31 @@ body {
   z-index: 1;
   opacity: 1; }
 
+.black-circle, .circle:before, .circle:after {
+  content: '';
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #191a24;
+  position: relative; }
+
+.circle:before {
+  bottom: 1vh;
+  right: 7vw; }
+  @media screen and (min-width: 768px) {
+    .circle:before {
+      bottom: 2vh;
+      right: 7vw; } }
+
+.circle:after {
+  bottom: 1vh;
+  left: 7vw; }
+  @media screen and (min-width: 768px) {
+    .circle:after {
+      bottom: 2vh;
+      right: 7vw; } }
+
 @media (scripting: enabled) {
   #background {
     background: #1e1f29 url(./images/bg-stars.svg) top left/100% 100%; }
@@ -266,7 +289,7 @@ body {
     animation: flipIn 0.5s ease-in; } }
   @media screen and (scripting: enabled) and (min-width: 768px) {
     .flipIn {
-      height: 12em; } }
+      height: 8em; } }
 
 @media (scripting: enabled) {
   .flipOut {
@@ -302,8 +325,8 @@ body {
       z-index: 99; } }
   @media screen and (scripting: enabled) and (min-width: 768px) {
     .screen {
-      width: 12em;
-      height: 12em; } }
+      width: 8em;
+      height: 8em; } }
 
 @media (scripting: enabled) {
   div.flip > p {

@@ -42,9 +42,6 @@ $fallback-colors: (
 
 html,
 body {
-  //@include bg-color(map-get($colors,White),nth($fallback-colors,1));
-  // background: hsl(236, 21%, 26%) url(./images/bg-stars.svg) top left/100% 100%;
-  @include font-color(map-get($colors,Black),nth($fallback-colors,2));
   font: {
      font-size: 1em;
      weight: $font_weight-normal;
@@ -115,11 +112,37 @@ body {
   z-index: 1;
   opacity:1;
 }
-
+.black-circle{
+    content:'';
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: hsl(234, 17%, 12%);
+    position:relative;
+}
+.circle:before{
+    @extend .black-circle;
+    bottom:1vh;
+    right: 7vw;
+    @media screen and(min-width:768px){
+       bottom:2vh;
+       right: 7vw;
+    }
+}
+.circle:after{
+    @extend .black-circle;
+    bottom:1vh;
+    left: 7vw; 
+    @media screen and(min-width:768px){
+      bottom:2vh;
+      right: 7vw;
+    }
+}
 
 @media (scripting: enabled) {
       #background{
-         background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
+          background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
       }
       .red-thick-font{
           @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
@@ -143,7 +166,7 @@ body {
           text-align:center;
           animation: flipIn 0.5s ease-in;
           @media screen and(min-width:768px){
-              height:12em;
+              height:8em;
           }
       }
       .flipOut{
@@ -187,8 +210,8 @@ body {
               z-index:99;
             }
             @media screen and (min-width:768px){
-                  width: 12em;
-                  height:12em;
+                  width: 8em;
+                  height:8em;
             }
       }
       div.flip > p{
