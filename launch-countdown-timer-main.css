@@ -181,11 +181,11 @@ body {
 .visually-hidden:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-  height: 1px;
+  height: 0.0625em;
   overflow: hidden;
   position: absolute;
   white-space: nowrap;
-  width: 1px; }
+  width: 0.0625em; }
 
 .btn {
   width: 12.5em;
@@ -225,8 +225,8 @@ body {
 
 .circle {
   display: inline-block;
-  height: 25px;
-  width: 25px;
+  height: 1.5625em;
+  width: 1.5625em;
   border-radius: 50%;
   background-color: #191a24;
   position: relative; }
@@ -241,7 +241,7 @@ body {
       right: 2.5em; } }
 
 @media (scripting: enabled) {
-  #background {
+  .background {
     background: #1e1f29 url(./images/bg-stars.svg) top left/100% 100%; }
 
   .red-thick-font {
@@ -249,7 +249,7 @@ body {
     color: #fb6087;
     font-weight: 600;
     font-size: 4.5em; } }
-  @media screen and (scripting: enabled) and (min-width: 768px) {
+  @media screen and (scripting: enabled) and (min-width: 48em) {
     .red-thick-font {
       font-size: 5.6em; } }
 
@@ -263,12 +263,16 @@ body {
     bottom: -5em; }
 
   .flipIn {
-    box-shadow: 3px 3px #343650;
+    box-shadow: 3px 30px #343650;
     background-image: linear-gradient(to bottom, #0f0f14, #343650);
     color: #2F2439;
     width: 100%;
     text-align: center;
-    animation: flipIn 0.5s ease-in; }
+    animation: flipIn 0.5s ease-in; } }
+  @media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+    .flipIn {
+      animation: flipIn 0.5s ease-in-out; } }
+@media (scripting: enabled) {
     .flipIn p {
       top: 1.0625em; }
 
@@ -287,22 +291,22 @@ body {
     100% {
       transform: rotate(0deg); } }
   .screen {
-    border: 1px solid black;
+    border: 0.0625em solid black;
     padding: 0 0.5em;
     min-width: 1em;
-    border-radius: 15px;
+    border-radius: 0.9375em;
     background-color: white;
     background-image: linear-gradient(to bottom, #191a24, #343650); }
     .screen:after {
       content: '';
-      border-bottom: 3px solid #191a24;
+      border-bottom: 0.1875em solid #191a24;
       transform: translateY(-18em);
       width: 100%;
       z-index: 99; } }
     @media screen and (scripting: enabled) and (min-width: 48em) {
       .screen:after {
         transform: translateY(-16.5em); } }
-  @media screen and (scripting: enabled) and (min-width: 768px) {
+  @media screen and (scripting: enabled) and (min-width: 48em) {
     .screen {
       height: 8em; } }
   @media screen and (scripting: enabled) and (max-width: 48em) {
@@ -324,34 +328,34 @@ body {
       main section div p {
         font-size: 1.2em; }
 
-  #hills {
+  .hills {
     position: relative;
-    top: calc(100% - 703px); }
+    top: calc(100% - 43.9375em); }
 
   ul {
     list-style-type: none; }
 
-  #ul-nav {
+  .ul-nav {
     position: relative;
     top: 2em; }
-    #ul-nav svg:hover path {
+    .ul-nav svg:hover path {
       fill: #fb6087; } }
-  @media screen and (scripting: enabled) and (min-width: 768px) {
-    #ul-nav {
+  @media screen and (scripting: enabled) and (min-width: 48em) {
+    .ul-nav {
       top: 6em; } }
 
 @media (scripting: enabled) {
-  #background-color-add-height {
+  .background-color-add-height {
     position: relative;
-    top: -4px;
+    top: -0.25em;
     width: 100vw;
-    height: 700px;
+    height: 43.75em;
     background-color: #2F2439; }
 
   footer {
     position: relative;
     top: 10em; } }
-  @media screen and (scripting: enabled) and (min-width: 768px) {
+  @media screen and (scripting: enabled) and (min-width: 48em) {
     footer {
       padding: 4em;
       font-size: 1.2em; } }

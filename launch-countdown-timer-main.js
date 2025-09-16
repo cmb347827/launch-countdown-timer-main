@@ -6,10 +6,10 @@ $(window).resize(function(){
 
 
 const data ={
-	 display_days: document.getElementById('days'),
-     display_hours: document.getElementById('hours'),
-     display_minutes:document.getElementById('minutes'),
-     display_seconds:document.getElementById('seconds'),
+	 display_days: document.querySelector('.days'),
+     display_hours: document.querySelector('.hours'),
+     display_minutes:document.querySelector('.minutes'),
+     display_seconds:document.querySelector('.seconds'),
      
      totalSeconds: 0,
      startTime: 0,

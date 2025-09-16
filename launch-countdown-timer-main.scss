@@ -1,5 +1,5 @@
-@import '_globals.scss';
-@import '_flexgrid.scss';
+@import 'globals.scss';
+@import 'flexgrid.scss';
 
 
 $colors: (
@@ -52,11 +52,11 @@ body {
 .visually-hidden:not(:focus):not(:active) {
   clip: rect(0 0 0 0); 
   clip-path: inset(50%);
-  height: 1px;
+  height: 0.0625em;
   overflow: hidden;
   position: absolute;
   white-space: nowrap; 
-  width: 1px;
+  width: 0.0625em;
 }
 .btn{
     width: 12.5em;
@@ -82,7 +82,6 @@ body {
 
 //image/svg classes
 .svg-hills-outer{
-
     max-width: 100%;
     max-height: 100%;
     @media screen and(min-width: 768px){
@@ -104,17 +103,14 @@ body {
 //the black dot that's mimimicking a folded in half card
 .circle{
     display: inline-block;
-    height: 25px;
-    width: 25px;
+    height: 1.5625em;
+    width: 1.5625em;
     border-radius: 50%;
     background-color: hsl(234, 17%, 12%);
     position:relative;
 }
 .move-right{
     left: 1em;
-     @media screen and(max-width:45em){
-        //left:2em;
-     }
 }
 .move-left{
     right:3em;
@@ -124,14 +120,14 @@ body {
 }
 
 @media (scripting: enabled) {
-      #background{
+      .background{
           background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
       }
       .red-thick-font{
           @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
           font-weight: 600;
           font-size: 4.5em;
-          @media screen and(min-width:768px){
+          @media screen and(min-width:48em){
               font-size:5.6em;
           }
       }
@@ -147,12 +143,16 @@ body {
       
 
       .flipIn {
-          box-shadow:3px 3px hsl(236, 21%, 26%);
+          box-shadow:3px 30px hsl(236, 21%, 26%);
           background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
           color:#2F2439;
           width: 100%;
           text-align:center;
           animation: flipIn 0.5s ease-in;
+      
+          @media (prefers-reduced-motion: reduce) {
+              animation : flipIn 0.5s ease-in-out;
+          }
           p{
              top: 1.0625em;
           }
@@ -179,16 +179,16 @@ body {
         }
     }
       .screen{
-            border: 1px solid black;
+            border: 0.0625em solid black;
             padding: 0 0.5em;
             min-width: 1em;
-            border-radius: 15px;
+            border-radius: 0.9375em;
             background-color: white;
             background-image:linear-gradient( to bottom, hsl(234, 17%, 12%), hsl(236, 21%, 26%));
             
             &:after{
               content:'';
-              border-bottom: 3px solid hsl(234, 17%, 12%);
+              border-bottom: 0.1875em solid hsl(234, 17%, 12%);
               transform: translateY(-18em);               
               width: 100%;
               z-index:99;
@@ -196,7 +196,7 @@ body {
                  transform: translateY(-16.5em);
               }
             }
-            @media screen and(min-width:768px){
+            @media screen and(min-width:48em){
                height:8em;
             }
             @media screen and(max-width: 48em){
@@ -224,28 +224,28 @@ body {
           }
       
       }
-      #hills{
+      .hills{
           position:relative;
-          top: calc(100% - 703px);
+          top: calc(100% - 43.9375em);
       }  
       ul {
         list-style-type: none;
       }
-      #ul-nav{
+      .ul-nav{
           position:relative;
           top:2em;
           svg:hover path{
              fill:map-get($colors,Soft red);
           }
-          @media screen and(min-width: 768px){
+          @media screen and(min-width: 48em){
                top: 6em;
           }
       }
-      #background-color-add-height{
+      .background-color-add-height{
           position:relative;
-          top:-4px;
+          top:-0.25em;
           width: 100vw;
-          height:700px;
+          height:43.75em;
           background-color: #2F2439;
       }
      
@@ -254,7 +254,7 @@ body {
         position:relative;
         top: 10em;
           
-        @media screen and(min-width:768px){
+        @media screen and(min-width:48em){
             @include padding(4em);
             font-size:1.2em;
         }
