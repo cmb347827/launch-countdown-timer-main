@@ -67,15 +67,15 @@
 .align-content-center {
   align-content: center; }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-1-md {
     flex: 1; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-3-md {
     flex: 3; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 748em) {
   .flex-2-md {
     flex: 2; } }
 
@@ -88,15 +88,15 @@
 .margin-auto {
   margin: 0 auto; }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .margin-0-md {
     margin: 0; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .me-1-md {
     margin-right: 1em; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .mb-5em-md {
     margin-bottom: 5em; } }
 
@@ -118,7 +118,7 @@
 .mb-5-em {
   margin-bottom: 5em; }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-noshrink-md-1 {
     flex-grow: 1;
     flex-shrink: 0; } }
@@ -135,35 +135,35 @@
 .grow-4 {
   flex-grow: 4; }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-basis-25-md {
     flex-basis: 25%; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-basis-80-md {
     flex-basis: 80%; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-basis-20-md {
     flex-basis: 20%; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-basis-40-md {
     flex-basis: 40%; } }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48em) {
   .flex-basis-60-md {
     flex-basis: 60%; } }
 
 .colRow {
   flex-direction: column; }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 48em) {
     .colRow {
       flex-direction: row; } }
 
 .rowCol {
   flex-direction: row; }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 48em) {
     .rowCol {
       flex-direction: column; } }
 
@@ -278,8 +278,12 @@ body {
 
   .flipOut {
     border-top: none;
-    animation: flipOut 0.5s ease-out; }
+    animation: flipOut 0.5s ease-out; } }
+  @media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+    .flipOut {
+      animation: flipIn 0.5s ease-in-out; } }
 
+@media (scripting: enabled) {
   @keyframes flipIn {
     0% {
       transform: rotateX(0deg); }
@@ -325,7 +329,7 @@ body {
     overflow: hidden; }
     main section {
       padding: 7em 2em; }
-      main section div p {
+      main section p {
         font-size: 1.2em; }
 
   .hills {

@@ -33,7 +33,7 @@ const data ={
      soundId:null,
      timeoutId:null,
      
-     pause: document.getElementById('pause'),
+     pause: document.querySelector('.js-pause'),
      paused: false,
      skip:'dont-skip',
      badValue:false,
@@ -43,14 +43,16 @@ const data ={
      minuteChange: false,
      secondChange:false,
 
-     tick_audio: document.getElementById('audio'),
-     sound: document.getElementById('sound'),
+     tick_audio: document.querySelector('.js-audio'),
+     sound: document.querySelector('.js-sound'),
      playSound: false,
 
      count:0,
 }
 
 
+
+//next two functions are for displaying values
 const addLeadingZero=(string,length)=>{
     if(typeof string !== String){
         string = String(string);
@@ -64,6 +66,9 @@ const displayCountdown=(days,hours,minutes,seconds)=>{
     data.display_seconds.children[0].textContent = addLeadingZero(seconds,2);
 }
 
+
+
+//next two functions are for updateSeconds()
 const timePassed=()=>{
     //currentime - startime
     const currentdate = new Date();
@@ -87,6 +92,10 @@ const updateSeconds=()=>{
       }
           
 }
+
+
+
+//next two functions are for calculating the total number of milliseconds at start of countdown.
 const testisNanOrInfinite=(value)=>{
     value = Number.isFinite(value);          //returns false for any non-number input, such as Infinity, 0/0, NaN, 'NaN' etc
     if(!value){
@@ -97,7 +106,7 @@ const calculateMilliseconds=(...para)=>{
     //1 day: 24 hours : 24 * 60 = 1440 minutes * 60 = 86400 seconds * 1000 = 86400000 milliseconds
     //so total number of milliseconds in number of (days) parameter.
     
-    let paras= [...para];
+    const paras= [...para];
     let arr=[];
     //check to make sure only numbers entered. 
     //good practice again with rest parameters.
@@ -138,20 +147,10 @@ const calculateMilliseconds=(...para)=>{
         return data.totalSeconds * 1000;
     }
 }
-const startStopSound=()=>{
-    //starts as data.playSound=false; then toggled.
-    if(data.playSound){
-        data.tick_audio.play()
-    }else if(!data.playSound){
-        //on stop clearinterval soundId
-        audio.load()
-        data.soundId= clearInterval(data.soundId);
-    }
-}
-const toggleSound=()=>{
-     data.playSound = !(data.playSound);
-     data.soundId=setInterval(startStopSound,1000);
-}
+
+
+
+//next two functions are for updating the values and adding a flip for each new value
 const addFlips=(change,display)=>{
         if(change){
             display.className ='red-thick-font top-z-index flipIn';
@@ -220,13 +219,38 @@ const updateValues=()=>{
     data.secondChange= (data.secondsLeft===data.previousSecondsLeft)?false:true;
     data.previousSecondsLeft = data.secondsLeft;
     addFlips(data.secondChange,data.display_seconds);
-    
 }
 
+
+
+
+
+//next two functions start/stop sound 
+const startStopSound=()=>{
+    //starts as data.playSound=false; then toggled.
+    if(data.playSound){
+        data.tick_audio.play()
+    }else if(!data.playSound){
+        //on stop clearinterval soundId
+        audio.load()
+        data.soundId= clearInterval(data.soundId);
+    }
+}
+const toggleSound=()=>{
+     data.playSound = !(data.playSound);
+     data.soundId=setInterval(startStopSound,1000);
+}
+
+
+
+//next four functions add/remove eventlisteners for togglesound and pause/start timer, and for pausing the timer.
 const removeEventListeners=()=>{
     //remove data.pause addEventListener
     data.pause.removeEventListener('click',duringPause, false);
     data.sound.removeEventListener('click',toggleSound,false);
+}
+const pauseCountdown=()=>{
+    data.intervalId = clearInterval(data.intervalId); 
 }
 const duringPause=()=>{                                                     
     let counter=1;
@@ -237,64 +261,68 @@ const duringPause=()=>{
         data.counterId = setInterval(()=>{
             data.pause.innerHTML= `Continue (counter): ${counter}`;
             ++counter;
-            if(!data.paused){
-                //clear counter setinterval id.
-                data.counterId=clearInterval(data.counterId);
-                data.pause.innerHTML= `Continue (counter): ${++counter}`;
-                data.pause.innerHTML= 'Pause';
-                counter=1;
-                data.skip='skip';
-                //calculate timeleft here now, to save about 0.5-1 seconds so counter and continuing time line up better.
-                const currentdate = new Date();
-                data.currentTime = currentdate.getTime();     
-                data.timePassed= data.currentTime - data.startTime;               
-                data.timeLeft = data.totalSeconds - data.timePassed;
-                //timer was paused so long that there's no time left, set display to all zeros and stop the timer.
-                if(data.timeLeft<=0){
-                    data.badValue=true;
-                    data.reachedZero=true;
-                    data.secondsLeft=0;
-                    data.minutesLeft=0;
-                    data.hoursLeft=0;
-                    data.daysLeft=0;
-                }
-            }
         },1000);
     }else if(!data.paused){
         //continue after pause.
         //When setInterval is restarted, updateMilliseconds (in startCountdown), calls timePassed , which gets the current time, 
         //startTime is once again subtracted from current time , so no extra calculations needed as this difference is all that's needed.
+        data.counterId=clearInterval(data.counterId);
+        data.pause.innerHTML= `Continue (counter): ${++counter}`;
+        data.pause.innerHTML= 'Pause';
+        
+        //calculate timeleft here now, to save about 0.5-1 seconds so counter and continuing time line up better.
+        const currentdate = new Date();
+        data.currentTime = currentdate.getTime();    
+        data.timePassed= data.currentTime - data.startTime;  
+        //data.timePassed= data.timePassed - counter;              
+        data.timeLeft = data.totalSeconds - data.timePassed;
+        //timer was paused so long that there's no time left, set display to all zeros and stop the timer.
+        if(data.timeLeft<=0){
+            data.badValue=true;
+            data.reachedZero=true;
+            data.secondsLeft=0;
+            data.minutesLeft=0;
+            data.hoursLeft=0;
+            data.daysLeft=0;
+        }
         data.intervalId = setInterval(startCountdown,1000);
+        counter=1;
+        //data.skip='dont-skip';   //skip or no skip makes no differnece
+        
     }
 }
 const addEventListeners=()=>{
-
+    //add pause/start timer and toggle sound eventlisteners.
     data.pause.addEventListener('click', duringPause,false);
     //because the user starts/stops the sound, it won't be tuned in properly with the clock flips , as the sound will be started/stopped at random times.
     //the user can start/stop the audio as a browsers requirement, vs autoplay.
     data.sound.addEventListener('click', toggleSound, false);
 }
 
+
+
+
+//next three functions start ,update and run the timer.
 const startCountdown=()=>{
     if(!data.reachedZero && !(data.badValue)){
         //displayCountdown(days,hours,minutes,seconds);
-        if(data.skip==='dont-skip'){
+        /*if(data.skip==='dont-skip'){
             const difference= updateSeconds();                
             data.timeLeft = difference;
             updateValues();
         } else if(data.skip==='skip'){
             updateValues();
             data.skip='dont-skip';
-        }
+        }*/
+         const difference= updateSeconds();                
+         data.timeLeft = difference;
+         updateValues();
      }else if(data.reachedZero || data.badValue){
         clearInterval(data.intervalId);
         clearTimeout(data.timeoutId);
         removeEventListeners();
      } 
      displayCountdown(data.daysLeft,data.hoursLeft,data.minutesLeft,data.secondsLeft);
-}
-const pauseCountdown=()=>{
-    data.intervalId = clearInterval(data.intervalId); 
 }
 
 const countDown=(days,hours,minutes,seconds)=>{
@@ -304,12 +332,17 @@ const countDown=(days,hours,minutes,seconds)=>{
 }
 
 const startTimer=(arrs)=>{
+    //initalizes the timer with the values for days,hours,minutes and seconds
     const [days,hours,minutes,seconds]=arrs;
+    //get current date/time
     const now= new Date();
     data.startTime = now.getTime();
+    //calculate the number of milliseconds in the total of the number of days,hours, minutes and seconds.
     data.totalSeconds = calculateMilliseconds(days);
+    //start the countdown 
 	countDown(days,hours,minutes,seconds);  
 }
+
 
 
 $(window).on('load',function(){

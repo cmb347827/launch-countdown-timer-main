@@ -72,17 +72,17 @@
     align-content:center;
 }
 .flex-1-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex: 1;
     }
 }
 .flex-3-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex: 3;
     }
 }
 .flex-2-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:748em){
         flex: 2;
     }
 }
@@ -96,17 +96,17 @@
     margin:0 auto;
 }
 .margin-0-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         margin:0;
     }
 }
 .me-1-md{
-    @media screen and(min-width: 768px){
+    @media screen and(min-width: 48em){
         margin-right:1em;
     }
 }
 .mb-5em-md{
-    @media screen and(min-width: 768px){
+    @media screen and(min-width: 48em){
         margin-bottom: 5em;
     }
 }
@@ -129,7 +129,7 @@
     margin-bottom: 5em;
 }
 .flex-noshrink-md-1{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex-grow:1;
         flex-shrink:0;
     }
@@ -148,40 +148,40 @@
 }
 
 .flex-basis-25-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex-basis: 25%;
     }
 }
 .flex-basis-80-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex-basis: 80%;
     }
 }
 .flex-basis-20-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex-basis: 20%;
     }
 }
 .flex-basis-40-md{
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
         flex-basis: 40%;
     }
 }
 .flex-basis-60-md{
-    @media screen and(min-width: 768px){
+    @media screen and(min-width: 48em){
         flex-basis: 60%;
     }
 }
 
 .colRow{
     flex-direction:column;
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
           flex-direction:row;
     }
 }
 .rowCol{
     flex-direction:row;
-    @media screen and(min-width:768px){
+    @media screen and(min-width:48em){
          flex-direction: column;
     }
 }
