@@ -145,23 +145,27 @@ body {
           color:#2F2439;
           width: 100%;
           text-align:center;
-          animation: flipIn 0.5s ease-in;
-      
-          @media (prefers-reduced-motion: reduce) {
-              animation : flipIn 0.5s ease-in-out;
-          }
+          animation:flipIn 0.5s ease-in;
           p{
              top: 1.0625em;
+          }
+      }
+      @media (prefers-reduced-motion: reduce) {
+          .flipIn{
+               animation:flipIn 0.5s ease-in-out;
           }
       }
       .flipOut{
           border-top:none;
           animation: flipOut 0.5s ease-out;
-          @media (prefers-reduced-motion: reduce) {
+      }
+       @media (prefers-reduced-motion: reduce) {
+          .flipOut{
               animation : flipIn 0.5s ease-in-out;
           }
-      }
-      
+       }
+
+
       @keyframes flipIn {
         0% {
           transform: rotateX(0deg);
