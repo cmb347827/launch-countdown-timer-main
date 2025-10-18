@@ -160,15 +160,15 @@ $fallback-colors: (
 
       
       .flipIn {
+          p{
+             top: 1.0625em;
+          }
           box-shadow:3px 30px hsl(236, 21%, 26%);
           background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
           color:#2F2439;
           width: 100%;
           text-align:center;
           animation:flipIn 0.5s ease-in;
-          p{
-             top: 1.0625em;
-          }
       }
       @media (prefers-reduced-motion: reduce) {
           .flipIn{
