@@ -157,12 +157,13 @@ $fallback-colors: (
               font-size:5.6em;
           }
       }
-
+      .flipin p{
+        
+        top: 1.0625em;
+          
+      }
       
       .flipIn {
-          p{
-             top: 1.0625em;
-          }
           box-shadow:3px 30px hsl(236, 21%, 26%);
           background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
           color:#2F2439;

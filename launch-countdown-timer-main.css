@@ -375,6 +375,11 @@ body {
   }
 }
 @media (scripting: enabled) {
+  .flipin p {
+    top: 1.0625em;
+  }
+}
+@media (scripting: enabled) {
   .flipIn {
     box-shadow: 3px 30px hsl(236deg, 21%, 26%);
     background-image: linear-gradient(to bottom, hsl(240deg, 14%, 7%), hsl(236deg, 21%, 26%));
@@ -383,9 +388,6 @@ body {
     text-align: center;
     -webkit-animation: flipIn 0.5s ease-in;
             animation: flipIn 0.5s ease-in;
-  }
-  .flipIn p {
-    top: 1.0625em;
   }
 }
 @media (scripting: enabled) and (prefers-reduced-motion: reduce) {
