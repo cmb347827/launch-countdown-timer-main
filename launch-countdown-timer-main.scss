@@ -38,218 +38,218 @@ $fallback-colors: (
 
 
 
-@media (scripting: enabled) {
-      *,
-      ::before,
-      ::after {
-        box-sizing: border-box;
-      }
 
-
-      html,
-      body {
-        font: {
-          size: 1em;
-          weight:400;
-          family: "./fonts/redhattext.ttf", serif;
-        }
-        
-      }
-      main{
-          height: 95vh;
-          overflow:hidden;
-          
-            
-          section{
-              padding: 7em 2em;
-              font-size:1.2em;
-          }
-      
-      }
-      h1{
-         position:relative;
-         top: 1em;
-      }
-      p{
-         position:relative;
-         bottom: -5em;
-       }
-      ul {
-        list-style-type: none;
-      }
-      footer{
-              
-        position:relative;
-        top: 10em;
-          
-        @media screen and(min-width:48em){
-            @include padding(4em);
-            font-size:1.2em;
-        }
-      }
-
-    
-      .btn{
-          width: 12.5em;
-          height: 2.5em;
-          padding: 0.3125em;
-          background-color: #fff;
-      }
-      .white-font{
-        @include font-color(map-get($colors,White),nth($fallback-colors,1));
-      }
-      .grayish-blue-font{
-        @include font-color(map-get($colors,Grayish blue),nth($fallback-colors,4));
-      }
-      .text-center{
-          text-align:center;
-      }
-      .text-uppercase{
-          text-transform: uppercase;
-      }
-      .letter-spacing2{
-        letter-spacing: 0.2em;
-      }
-
-      //image/svg classes
-      .svg-hills-outer{
-          max-width: 100%;
-          max-height: 100%;
-      }
-      .svg-100{
-          width:100%;
-          height:100%;
-      }
-
-      .top-z-index{
-        //needed for z-index.
-        position: relative;
-        z-index: 1;
-        opacity:1;
-      }
-
-      //the black dot that's mimimicking a folded in half card
-      .circle{
-          display: inline-block;
-          height: 1.5625em;
-          width: 1.5625em;
-          border-radius: 50%;
-          background-color: hsl(234, 17%, 12%);
-          position:relative;
-      }
-      .move-right{
-          left: 1em;
-      }
-      .move-left{
-          right:3em;
-          @media screen and(max-width:45em){
-              right:2.5em;
-          }
-      }
-      .background{
-          background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
-      }
-      .red-thick-font{
-          @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
-          font-weight: gl.$font_weight-semibold;
-          font-size: 4.5em;
-          @media screen and(min-width:48em){
-              font-size:5.6em;
-          }
-      }
-      .flipin p{
-        
-        top: 1.0625em;
-          
-      }
-      
-      .flipIn {
-          box-shadow:3px 30px hsl(236, 21%, 26%);
-          background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
-          color:#2F2439;
-          width: 100%;
-          text-align:center;
-          animation:flipIn 0.5s ease-in;
-      }
-      @media (prefers-reduced-motion: reduce) {
-          .flipIn{
-               animation:flipIn 0.5s ease-in-out;
-          }
-      }
-      .flipOut{
-          border-top:none;
-          animation: flipOut 0.5s ease-out;
-      }
-       @media (prefers-reduced-motion: reduce) {
-          .flipOut{
-              animation : flipIn 0.5s ease-in-out;
-          }
-       }
-
-
-      @keyframes flipIn {
-        0% {
-          transform: rotateX(0deg);
-        }
-        100% {
-          transform: rotateX(180deg);
-        }
-      }
-      @keyframes flipOut{
-        0%{
-            transform: rotateX(-180deg);
-        }
-        100%{
-            transform: rotate(0deg);
-        }
-    }
-      .screen{
-            border: 0.0625em solid black;
-            padding: 0 0.5em;
-            min-width: 1em;
-            border-radius: 0.9375em;
-            background-color: white;
-            background-image:linear-gradient( to bottom, hsl(234, 17%, 12%), hsl(236, 21%, 26%));
-            
-            &:after{
-              content:'';
-              border-bottom: 0.1875em solid hsl(234, 17%, 12%);
-              transform: translateY(-18em);               
-              width: 100%;
-              z-index:99;
-              @media screen and(min-width: 48em){
-                 transform: translateY(-16.5em);
-              }
-            }
-            @media screen and(min-width:48em){
-               height:8em;
-            }
-            @media screen and(max-width: 48em){
-               font-size: 0.8em;
-               span{
-                  position:relative;
-                  top: 0.4em;
-               }
-            }
-            @media screen and(max-width:45em){
-               font-size: 0.6em;
-            }
-      }
-      
-      .hills{
-          position:relative;
-          top: calc(100% - 43.9375em);
-      }  
-    
-      .background-color-add-height{
-          position:relative;
-          top:-0.25em;
-          width: 100vw;
-          height:43.75em;
-          background-color: #2F2439;
-      }
-     
+*,
+::before,
+::after {
+  box-sizing: border-box;
 }
+
+
+html,
+body {
+  font: {
+    size: 1em;
+    weight:400;
+    family: "./fonts/redhattext.ttf", serif;
+  }
+  
+}
+main{
+    height: 95vh;
+    overflow:hidden;
+    
+      
+    section{
+        padding: 7em 2em;
+        font-size:1.2em;
+    }
+
+}
+h1{
+    position:relative;
+    top: 1em;
+}
+p{
+    position:relative;
+    bottom: -5em;
+  }
+ul {
+  list-style-type: none;
+}
+footer{
+        
+  position:relative;
+  top: 10em;
+    
+  @media screen and(min-width:48em){
+      @include padding(4em);
+      font-size:1.2em;
+  }
+}
+
+
+.btn{
+    width: 12.5em;
+    height: 2.5em;
+    padding: 0.3125em;
+    background-color: #fff;
+}
+.white-font{
+  @include font-color(map-get($colors,White),nth($fallback-colors,1));
+}
+.grayish-blue-font{
+  @include font-color(map-get($colors,Grayish blue),nth($fallback-colors,4));
+}
+.text-center{
+    text-align:center;
+}
+.text-uppercase{
+    text-transform: uppercase;
+}
+.letter-spacing2{
+  letter-spacing: 0.2em;
+}
+
+//image/svg classes
+.svg-hills-outer{
+    max-width: 100%;
+    max-height: 100%;
+}
+.svg-100{
+    width:100%;
+    height:100%;
+}
+
+.top-z-index{
+  //needed for z-index.
+  position: relative;
+  z-index: 1;
+  opacity:1;
+}
+
+//the black dot that's mimimicking a folded in half card
+.circle{
+    display: inline-block;
+    height: 1.5625em;
+    width: 1.5625em;
+    border-radius: 50%;
+    background-color: hsl(234, 17%, 12%);
+    position:relative;
+}
+.move-right{
+    left: 1em;
+}
+.move-left{
+    right:3em;
+    @media screen and(max-width:45em){
+        right:2.5em;
+    }
+}
+.background{
+    background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
+}
+.red-thick-font{
+    @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
+    font-weight: gl.$font_weight-semibold;
+    font-size: 4.5em;
+    @media screen and(min-width:48em){
+        font-size:5.6em;
+    }
+}
+.flipin p{
+  
+  top: 1.0625em;
+    
+}
+
+.flipIn {
+    box-shadow:3px 30px hsl(236, 21%, 26%);
+    background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
+    color:#2F2439;
+    width: 100%;
+    text-align:center;
+    animation:flipIn 0.5s ease-in;
+}
+@media (prefers-reduced-motion: reduce) {
+    .flipIn{
+          animation:flipIn 0.5s ease-in-out;
+    }
+}
+.flipOut{
+    border-top:none;
+    animation: flipOut 0.5s ease-out;
+}
+  @media (prefers-reduced-motion: reduce) {
+    .flipOut{
+        animation : flipIn 0.5s ease-in-out;
+    }
+  }
+
+
+@keyframes flipIn {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+@keyframes flipOut{
+  0%{
+      transform: rotateX(-180deg);
+  }
+  100%{
+      transform: rotate(0deg);
+  }
+}
+.screen{
+      border: 0.0625em solid black;
+      padding: 0 0.5em;
+      min-width: 1em;
+      border-radius: 0.9375em;
+      background-color: white;
+      background-image:linear-gradient( to bottom, hsl(234, 17%, 12%), hsl(236, 21%, 26%));
+      
+      &:after{
+        content:'';
+        border-bottom: 0.1875em solid hsl(234, 17%, 12%);
+        transform: translateY(-18em);               
+        width: 100%;
+        z-index:99;
+        @media screen and(min-width: 48em){
+            transform: translateY(-16.5em);
+        }
+      }
+      @media screen and(min-width:48em){
+          height:8em;
+      }
+      @media screen and(max-width: 48em){
+          font-size: 0.8em;
+          span{
+            position:relative;
+            top: 0.4em;
+          }
+      }
+      @media screen and(max-width:45em){
+          font-size: 0.6em;
+      }
+}
+
+.hills{
+    position:relative;
+    top: calc(100% - 43.9375em);
+}  
+
+.background-color-add-height{
+    position:relative;
+    top:-0.25em;
+    width: 100vw;
+    height:43.75em;
+    background-color: #2F2439;
+}
+
+
 
 .ul nav{
     position:relative;
@@ -278,7 +278,7 @@ $fallback-colors: (
 }
 
 @media (scripting: none) {
-  
+  //should come first?
   /* fallback styles when JS is not supported */
   /*leave carousel collapsed but add some styling */
 

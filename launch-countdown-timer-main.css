@@ -235,244 +235,226 @@
   }
 }
 
-@media (scripting: enabled) {
-  *,
+*,
 ::before,
 ::after {
-    box-sizing: border-box;
-  }
-  html,
-body {
-    font-size: 1em;
-    font-weight: 400;
-    font-family: "./fonts/redhattext.ttf", serif;
-  }
-  main {
-    height: 95vh;
-    overflow: hidden;
-  }
-  main section {
-    padding: 7em 2em;
-    font-size: 1.2em;
-  }
-  h1 {
-    position: relative;
-    top: 1em;
-  }
-  p {
-    position: relative;
-    bottom: -5em;
-  }
-  ul {
-    list-style-type: none;
-  }
-  footer {
-    position: relative;
-    top: 10em;
-  }
+  box-sizing: border-box;
 }
-@media screen and (scripting: enabled) and (min-width: 48em) {
+
+html,
+body {
+  font-size: 1em;
+  font-weight: 400;
+  font-family: "./fonts/redhattext.ttf", serif;
+}
+
+main {
+  height: 95vh;
+  overflow: hidden;
+}
+main section {
+  padding: 7em 2em;
+  font-size: 1.2em;
+}
+
+h1 {
+  position: relative;
+  top: 1em;
+}
+
+p {
+  position: relative;
+  bottom: -5em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+footer {
+  position: relative;
+  top: 10em;
+}
+@media screen and (min-width: 48em) {
   footer {
     padding: 4em;
     font-size: 1.2em;
   }
 }
-@media (scripting: enabled) {
-  .btn {
-    width: 12.5em;
-    height: 2.5em;
-    padding: 0.3125em;
-    background-color: #fff;
-  }
+
+.btn {
+  width: 12.5em;
+  height: 2.5em;
+  padding: 0.3125em;
+  background-color: #fff;
 }
-@media (scripting: enabled) {
-  .white-font {
-    color: Snow;
-    color: hsl(0deg, 100%, 100%);
-  }
+
+.white-font {
+  color: Snow;
+  color: hsl(0deg, 100%, 100%);
 }
-@media (scripting: enabled) {
-  .grayish-blue-font {
-    color: LightSteelBlue;
-    color: hsl(237deg, 18%, 59%);
-  }
+
+.grayish-blue-font {
+  color: LightSteelBlue;
+  color: hsl(237deg, 18%, 59%);
 }
-@media (scripting: enabled) {
-  .text-center {
-    text-align: center;
-  }
+
+.text-center {
+  text-align: center;
 }
-@media (scripting: enabled) {
-  .text-uppercase {
-    text-transform: uppercase;
-  }
+
+.text-uppercase {
+  text-transform: uppercase;
 }
-@media (scripting: enabled) {
-  .letter-spacing2 {
-    letter-spacing: 0.2em;
-  }
+
+.letter-spacing2 {
+  letter-spacing: 0.2em;
 }
-@media (scripting: enabled) {
-  .svg-hills-outer {
-    max-width: 100%;
-    max-height: 100%;
-  }
+
+.svg-hills-outer {
+  max-width: 100%;
+  max-height: 100%;
 }
-@media (scripting: enabled) {
-  .svg-100 {
-    width: 100%;
-    height: 100%;
-  }
+
+.svg-100 {
+  width: 100%;
+  height: 100%;
 }
-@media (scripting: enabled) {
-  .top-z-index {
-    position: relative;
-    z-index: 1;
-    opacity: 1;
-  }
+
+.top-z-index {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
 }
-@media (scripting: enabled) {
-  .circle {
-    display: inline-block;
-    height: 1.5625em;
-    width: 1.5625em;
-    border-radius: 50%;
-    background-color: hsl(234deg, 17%, 12%);
-    position: relative;
-  }
+
+.circle {
+  display: inline-block;
+  height: 1.5625em;
+  width: 1.5625em;
+  border-radius: 50%;
+  background-color: hsl(234deg, 17%, 12%);
+  position: relative;
 }
-@media (scripting: enabled) {
-  .move-right {
-    left: 1em;
-  }
+
+.move-right {
+  left: 1em;
 }
-@media (scripting: enabled) {
-  .move-left {
-    right: 3em;
-  }
+
+.move-left {
+  right: 3em;
 }
-@media screen and (scripting: enabled) and (max-width: 45em) {
+@media screen and (max-width: 45em) {
   .move-left {
     right: 2.5em;
   }
 }
-@media (scripting: enabled) {
-  .background {
-    background: hsl(235deg, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
-  }
+
+.background {
+  background: hsl(235deg, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
 }
-@media (scripting: enabled) {
-  .red-thick-font {
-    color: IndianRed;
-    color: hsl(345deg, 95%, 68%);
-    font-weight: 600;
-    font-size: 4.5em;
-  }
+
+.red-thick-font {
+  color: IndianRed;
+  color: hsl(345deg, 95%, 68%);
+  font-weight: 600;
+  font-size: 4.5em;
 }
-@media screen and (scripting: enabled) and (min-width: 48em) {
+@media screen and (min-width: 48em) {
   .red-thick-font {
     font-size: 5.6em;
   }
 }
-@media (scripting: enabled) {
-  .flipin p {
-    top: 1.0625em;
-  }
+
+.flipin p {
+  top: 1.0625em;
 }
-@media (scripting: enabled) {
-  .flipIn {
-    box-shadow: 3px 30px hsl(236deg, 21%, 26%);
-    background-image: linear-gradient(to bottom, hsl(240deg, 14%, 7%), hsl(236deg, 21%, 26%));
-    color: #2F2439;
-    width: 100%;
-    text-align: center;
-    -webkit-animation: flipIn 0.5s ease-in;
-            animation: flipIn 0.5s ease-in;
-  }
+
+.flipIn {
+  box-shadow: 3px 30px hsl(236deg, 21%, 26%);
+  background-image: linear-gradient(to bottom, hsl(240deg, 14%, 7%), hsl(236deg, 21%, 26%));
+  color: #2F2439;
+  width: 100%;
+  text-align: center;
+  -webkit-animation: flipIn 0.5s ease-in;
+          animation: flipIn 0.5s ease-in;
 }
-@media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+
+@media (prefers-reduced-motion: reduce) {
   .flipIn {
     -webkit-animation: flipIn 0.5s ease-in-out;
             animation: flipIn 0.5s ease-in-out;
   }
 }
-@media (scripting: enabled) {
-  .flipOut {
-    border-top: none;
-    -webkit-animation: flipOut 0.5s ease-out;
-            animation: flipOut 0.5s ease-out;
-  }
+.flipOut {
+  border-top: none;
+  -webkit-animation: flipOut 0.5s ease-out;
+          animation: flipOut 0.5s ease-out;
 }
-@media (scripting: enabled) and (prefers-reduced-motion: reduce) {
+
+@media (prefers-reduced-motion: reduce) {
   .flipOut {
     -webkit-animation: flipIn 0.5s ease-in-out;
             animation: flipIn 0.5s ease-in-out;
   }
 }
-@media (scripting: enabled) {
-  @-webkit-keyframes flipIn {
-    0% {
-      transform: rotateX(0deg);
-    }
-    100% {
-      transform: rotateX(180deg);
-    }
+@-webkit-keyframes flipIn {
+  0% {
+    transform: rotateX(0deg);
   }
-  @keyframes flipIn {
-    0% {
-      transform: rotateX(0deg);
-    }
-    100% {
-      transform: rotateX(180deg);
-    }
+  100% {
+    transform: rotateX(180deg);
   }
 }
-@media (scripting: enabled) {
-  @-webkit-keyframes flipOut {
-    0% {
-      transform: rotateX(-180deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
+@keyframes flipIn {
+  0% {
+    transform: rotateX(0deg);
   }
-  @keyframes flipOut {
-    0% {
-      transform: rotateX(-180deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
+  100% {
+    transform: rotateX(180deg);
   }
 }
-@media (scripting: enabled) {
-  .screen {
-    border: 0.0625em solid black;
-    padding: 0 0.5em;
-    min-width: 1em;
-    border-radius: 0.9375em;
-    background-color: white;
-    background-image: linear-gradient(to bottom, hsl(234deg, 17%, 12%), hsl(236deg, 21%, 26%));
+@-webkit-keyframes flipOut {
+  0% {
+    transform: rotateX(-180deg);
   }
-  .screen:after {
-    content: "";
-    border-bottom: 0.1875em solid hsl(234deg, 17%, 12%);
-    transform: translateY(-18em);
-    width: 100%;
-    z-index: 99;
+  100% {
+    transform: rotate(0deg);
   }
 }
-@media screen and (scripting: enabled) and (min-width: 48em) {
+@keyframes flipOut {
+  0% {
+    transform: rotateX(-180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.screen {
+  border: 0.0625em solid black;
+  padding: 0 0.5em;
+  min-width: 1em;
+  border-radius: 0.9375em;
+  background-color: white;
+  background-image: linear-gradient(to bottom, hsl(234deg, 17%, 12%), hsl(236deg, 21%, 26%));
+}
+.screen:after {
+  content: "";
+  border-bottom: 0.1875em solid hsl(234deg, 17%, 12%);
+  transform: translateY(-18em);
+  width: 100%;
+  z-index: 99;
+}
+@media screen and (min-width: 48em) {
   .screen:after {
     transform: translateY(-16.5em);
   }
 }
-@media screen and (scripting: enabled) and (min-width: 48em) {
+@media screen and (min-width: 48em) {
   .screen {
     height: 8em;
   }
 }
-@media screen and (scripting: enabled) and (max-width: 48em) {
+@media screen and (max-width: 48em) {
   .screen {
     font-size: 0.8em;
   }
@@ -481,26 +463,25 @@ body {
     top: 0.4em;
   }
 }
-@media screen and (scripting: enabled) and (max-width: 45em) {
+@media screen and (max-width: 45em) {
   .screen {
     font-size: 0.6em;
   }
 }
-@media (scripting: enabled) {
-  .hills {
-    position: relative;
-    top: calc(100% - 43.9375em);
-  }
+
+.hills {
+  position: relative;
+  top: calc(100% - 43.9375em);
 }
-@media (scripting: enabled) {
-  .background-color-add-height {
-    position: relative;
-    top: -0.25em;
-    width: 100vw;
-    height: 43.75em;
-    background-color: #2F2439;
-  }
+
+.background-color-add-height {
+  position: relative;
+  top: -0.25em;
+  width: 100vw;
+  height: 43.75em;
+  background-color: #2F2439;
 }
+
 .ul nav {
   position: relative;
   top: 2em;
