@@ -1,5 +1,7 @@
-@import 'globals.scss';
-@import 'flexgrid.scss';
+
+
+@use 'globals' as gl;
+@use 'flexgrid';
 
 
 $colors: (
@@ -33,100 +35,36 @@ $fallback-colors: (
   padding: $args;
 }
 
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
 
 
-html,
-body {
-  font: {
-     size: 1em;
-     weight: 400;
-	   family: "./fonts/redhattext.ttf", serif;
-  }
-  
-}
-.visually-hidden:not(:focus):not(:active) {
-  clip: rect(0 0 0 0); 
-  clip-path: inset(50%);
-  height: 0.0625em;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap; 
-  width: 0.0625em;
-}
-.btn{
-    width: 12.5em;
-    height: 2.5em;
-    padding: 0.3125em;
-    background-color: #fff;
-}
-.white-font{
-  @include font-color(map-get($colors,White),nth($fallback-colors,1));
-}
-.grayish-blue-font{
-  @include font-color(map-get($colors,Grayish blue),nth($fallback-colors,4));
-}
-.text-center{
-    text-align:center;
-}
-.text-uppercase{
-    text-transform: uppercase;
-}
-.letter-spacing2{
-   letter-spacing: 0.2em;
-}
-
-//image/svg classes
-.svg-hills-outer{
-    max-width: 100%;
-    max-height: 100%;
-}
-.svg-100{
-    width:100%;
-    height:100%;
-}
-
-.top-z-index{
-  //needed for z-index.
-  position: relative;
-  z-index: 1;
-  opacity:1;
-}
-
-//the black dot that's mimimicking a folded in half card
-.circle{
-    display: inline-block;
-    height: 1.5625em;
-    width: 1.5625em;
-    border-radius: 50%;
-    background-color: hsl(234, 17%, 12%);
-    position:relative;
-}
-.move-right{
-    left: 1em;
-}
-.move-left{
-    right:3em;
-    @media screen and(max-width:45em){
-        right:2.5em;
-     }
-}
 
 @media (scripting: enabled) {
-      .background{
-          background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
       }
-      .red-thick-font{
-          @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
-          font-weight: 600;
-          font-size: 4.5em;
-          @media screen and(min-width:48em){
-              font-size:5.6em;
+
+
+      html,
+      body {
+        font: {
+          size: 1em;
+          weight:400;
+          family: "./fonts/redhattext.ttf", serif;
+        }
+        
+      }
+      main{
+          height: 95vh;
+          overflow:hidden;
+          
+            
+          section{
+              padding: 7em 2em;
+              font-size:1.2em;
           }
+      
       }
       h1{
          position:relative;
@@ -136,9 +74,91 @@ body {
          position:relative;
          bottom: -5em;
        }
+      ul {
+        list-style-type: none;
+      }
+      footer{
+              
+        position:relative;
+        top: 10em;
+          
+        @media screen and(min-width:48em){
+            @include padding(4em);
+            font-size:1.2em;
+        }
+      }
+
+    
+      .btn{
+          width: 12.5em;
+          height: 2.5em;
+          padding: 0.3125em;
+          background-color: #fff;
+      }
+      .white-font{
+        @include font-color(map-get($colors,White),nth($fallback-colors,1));
+      }
+      .grayish-blue-font{
+        @include font-color(map-get($colors,Grayish blue),nth($fallback-colors,4));
+      }
+      .text-center{
+          text-align:center;
+      }
+      .text-uppercase{
+          text-transform: uppercase;
+      }
+      .letter-spacing2{
+        letter-spacing: 0.2em;
+      }
+
+      //image/svg classes
+      .svg-hills-outer{
+          max-width: 100%;
+          max-height: 100%;
+      }
+      .svg-100{
+          width:100%;
+          height:100%;
+      }
+
+      .top-z-index{
+        //needed for z-index.
+        position: relative;
+        z-index: 1;
+        opacity:1;
+      }
+
+      //the black dot that's mimimicking a folded in half card
+      .circle{
+          display: inline-block;
+          height: 1.5625em;
+          width: 1.5625em;
+          border-radius: 50%;
+          background-color: hsl(234, 17%, 12%);
+          position:relative;
+      }
+      .move-right{
+          left: 1em;
+      }
+      .move-left{
+          right:3em;
+          @media screen and(max-width:45em){
+              right:2.5em;
+          }
+      }
+      .background{
+          background: hsl(235, 16%, 14%) url(./images/bg-stars.svg) top left/100% 100%;
+      }
+      .red-thick-font{
+          @include font-color(map-get($colors,Soft red),nth($fallback-colors,3));
+          font-weight: gl.$font_weight-semibold;
+          font-size: 4.5em;
+          @media screen and(min-width:48em){
+              font-size:5.6em;
+          }
+      }
 
       
-
       .flipIn {
           box-shadow:3px 30px hsl(236, 21%, 26%);
           background-image:linear-gradient( to bottom, hsl(240, 14%, 7%), hsl(236, 21%, 26%));
@@ -215,36 +235,11 @@ body {
             }
       }
       
-      main{
-          height: 95vh;
-          overflow:hidden;
-          
-            
-          section{
-              padding: 7em 2em;
-              p{
-                 font-size:1.2em;
-              }
-          }
-      
-      }
       .hills{
           position:relative;
           top: calc(100% - 43.9375em);
       }  
-      ul {
-        list-style-type: none;
-      }
-      .ul-nav{
-          position:relative;
-          top:2em;
-          svg:hover path{
-             fill:map-get($colors,Soft red);
-          }
-          @media screen and(min-width: 48em){
-               top: 6em;
-          }
-      }
+    
       .background-color-add-height{
           position:relative;
           top:-0.25em;
@@ -253,18 +248,34 @@ body {
           background-color: #2F2439;
       }
      
-      footer{
-              
-        position:relative;
-        top: 10em;
-          
-        @media screen and(min-width:48em){
-            @include padding(4em);
-            font-size:1.2em;
-        }
-      }
-     
 }
+
+.ul nav{
+    position:relative;
+    top:2em;
+    @media screen and(min-width: 48em){
+        top: 6em;
+     }
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 0.0625em;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 0.0625em;
+}
+
+.ul-nav{
+      
+    svg:hover path{
+        fill:map-get($colors,Soft red);
+    }
+          
+}
+
 @media (scripting: none) {
   
   /* fallback styles when JS is not supported */
