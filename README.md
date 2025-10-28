@@ -54,6 +54,9 @@ Users should be able to:
 - It  works for any days,hours,minutes value, and test for non-integer values, or Infinity this can be changed in the onload function.
 - I added the bonus flip , though it's more of a pseudo flip, it looks like a flip and I added , for pracice, a add/remove sound.
   button. I first wanted the app to automatically load a sound and play on each flip, but as I soon learned it's not advisable, as it could be annoying to users. So I added the button instead. It's impossible to align the sound to the flip this way though.
+- I validated the html file on 10/28/25 at 'https://validator.w3.org/nu/#file' and got 'Document checking completed. No errors or warnings to show.'
+  I validated the CSS file on 10/28/25 at 'https://jigsaw.w3.org/css-validator/validator.html.en#validate_by_upload' and got 'Congratulations! No Error Found.This document validates as CSS level 3 + SVG !'
+  I then went to Lighthouse on 10/28/25 for an evalution, and got for mobile: 100 in performance,95 in accessiblity,100 in best practices, and 91 in seo. And for desktop: 100 in performance, 95 in accessiblity,100 in best practices, and 91 in seo.
  
 ### Continued development
 
